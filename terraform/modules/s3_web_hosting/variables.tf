@@ -1,1 +1,8 @@
-# input variables for this modules are defined here
+variable "subdomain" {
+}
+
+variable "domain" {
+}
+
+variable "bucket_name" {
+}
