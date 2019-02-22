@@ -76,6 +76,8 @@ jobs:
           command: |
             cd terraform
             terraform plan -out=terraform.plan
+            pwd
+            ls
       # - persist_to_workspace:
       #     root: *working_directory
       #     paths:
