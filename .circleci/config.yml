@@ -81,7 +81,7 @@ jobs:
             pwd
             ls
       - persist_to_workspace:
-          root: &working_directory /terraform
+          root: *working_directory
           paths:
             - terraform/terraform.plan
 
