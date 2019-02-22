@@ -80,10 +80,10 @@ jobs:
             terraform plan -out=terraform.plan
             pwd
             ls
-      # - persist_to_workspace:
-      #     root: *working_directory
-      #     paths:
-      #       - terraform.plan
+      - persist_to_workspace:
+          root: *working_directory /terraform
+          paths:
+            - terraform/terraform.plan
 
   apply:
     <<: *apply_job
