@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "static_web_hosting_s3_bucket" {
     index_document = "index.html"
     error_document = "error.html"
   }
-  
+
   tags {
     Name = "${var.bucket_name}"
   }
