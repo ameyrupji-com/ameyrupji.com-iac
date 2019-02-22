@@ -1,6 +1,15 @@
 # creating bucket
 resource "aws_s3_bucket" "static_web_hosting_s3_bucket" {
   bucket = "${var.bucket_name}"
+
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
+  
+  tags {
+    Name = "${var.bucket_name}"
+  }
 }
 
 # creating bucket public read policy
