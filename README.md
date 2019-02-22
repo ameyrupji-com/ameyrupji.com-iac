@@ -5,7 +5,10 @@
 Infrastructure as code for hosting ameyrupji.com in AWS using Terraform
 
 
-## Prerequisites before running terraform commands
-[ ] S3 Bucket created to store state.
-[ ] IAM Role to update state file.
+## Infrastructure diagram
 
+
+## Prerequisites before running terraform commands
+- [x] S3 Bucket created to store state
+- [x] IAM Role to update state file (cirlce-ci-iac). Can have the following policies attached AmazonS3FullAccess, AmazonRoute53DomainsFullAccess
+- [x] Update Environment Variables (AWS_ACCESS_KEY_ID, AWS_REGION, AWS_SECRET_ACCESS_KEY) in Environment variables for Build
