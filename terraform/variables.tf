@@ -1,5 +1,3 @@
-variable "region" {
-}
+variable "region" {}
 
-variable "domain" {
-}
+variable "domain" {}

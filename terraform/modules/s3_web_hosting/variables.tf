@@ -1,8 +1,5 @@
-variable "subdomain" {
-}
+variable "subdomain" {}
 
-variable "domain" {
-}
+variable "domain" {}
 
-variable "bucket_name" {
-}
+variable "bucket_name" {}

@@ -1,14 +1,13 @@
-
 # State Bucket 
 resource "aws_s3_bucket" "domain_iac_s3_bucket" {
-  bucket              = "${var.domain}-iac"
+  bucket = "${var.domain}-iac"
 
   versioning {
-    enabled           = true
+    enabled = true
   }
 
   tags {
-    Name              = "${var.domain}-iac"
+    Name = "${var.domain}-iac"
   }
 }
 
@@ -18,12 +17,15 @@ resource "aws_s3_bucket" "domain_iac_s3_bucket" {
 #   hash_key       = "LockID"
 #   billing_mode   = "PAY_PER_REQUEST" 
 
+
 #   attribute {
 #     name        = "LockID"
 #     type        = "S"
 #   }
 
+
 #   tags {
 #     Name        = "${var.domain}-terraform-state-file-locking"
 #   }
 # }
+

@@ -25,7 +25,6 @@ resource "aws_s3_bucket_policy" "static_web_hosting_s3_bucket_policy" {
 POLICY
 }
 
-
 data "aws_route53_zone" "static_website_route53_zone" {
   name = "${var.domain}."
 }
