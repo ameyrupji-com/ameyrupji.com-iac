@@ -16,12 +16,14 @@ The following infrastructure is created to host ameyrupji.com
   - beta.ameyrupji.com
   - blog.ameyrupji.com
   - code.ameyrupji.com
+  - images.ameyrupji.com
 - Hosted Zones Record Sets
   - name = ""
   - name = "www"
   - name = "beta"
   - name = "blog"
   - name = "code"
+  - name = "images"
 - TODO: Cloud Front CDN for ameyrupji.com
 - Enable storing of terraform state in DynamoDB
 
