@@ -31,7 +31,6 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      source $BASH_ENV
       terraform init
 apply_job: &apply_job
   <<: *default_config
@@ -53,7 +52,6 @@ jobs:
       - run:
           name: terraform fmt
           command: |
-            source $BASH_ENV
             if [ $(terraform fmt | grep -v .terraform | tee fmt_result.txt | wc -l) -gt 0 ]; then
               echo "Format of this terraform files is not appropiate:"
               echo
@@ -74,7 +72,6 @@ jobs:
       - run:
           name: terraform plan
           command: |
-            source $BASH_ENV
             terraform plan -out=./terraform.plan
       - persist_to_workspace:
           root: *working_directory
