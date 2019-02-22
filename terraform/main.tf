@@ -39,8 +39,6 @@ module "s3-beta-domain" {
 module "s3-www-domain" {
   source = "./modules/s3_web_redirect"
 
-  subdomain            = "www"
-  domain               = "${var.domain}"
   bucket_name          = "www.${var.domain}"
   redirect_bucket_name = "${var.domain}"
 }
