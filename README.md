@@ -4,7 +4,6 @@
 
 Infrastructure as code for hosting ameyrupji.com in AWS using Terraform
 
-
 ## Infrastructure
 The following infrastructure is created to host ameyrupji.com
 - Domain (ameyrupji.com) - Created Manually
@@ -24,17 +23,17 @@ The following infrastructure is created to host ameyrupji.com
   - name = "blog"
   - name = "code"
   - name = "images"
-- TODO: Cloud Front CDN for ameyrupji.com
-- Enable storing of terraform state in DynamoDB
+- [ ] Cloud Front CDN for ameyrupji.com
+- [ ] DynamoDB table to Terraform State
 
 ### Daigram
 ![Infrastructure Diagram](/images/ameyrupji.com-blueprint.png)
+
 Link:
 https://cloudcraft.co/view/a84a92f3-0147-42eb-be3e-bc849d99d6d6?key=7EtAxVRr-L84VOa7CFUsWA&embed=true
 
 
-
 ## Prerequisites
-- [x] S3 Bucket created to store state
-- [x] IAM Role to update state file (cirlce-ci-iac). Can have the following policies attached AmazonS3FullAccess, AmazonRoute53DomainsFullAccess
-- [x] Update Environment Variables (AWS_ACCESS_KEY_ID, AWS_REGION, AWS_SECRET_ACCESS_KEY) in Environment variables for Build
+- [x] S3 Bucket created to store state (ameyrupji.com-iac).
+- [x] IAM Role to update state file (cirlce-ci-iac). Can have the following policies attached AmazonS3FullAccess, AmazonRoute53DomainsFullAccess.
+- [x] Update Environment Variables (AWS_ACCESS_KEY_ID, AWS_REGION, AWS_SECRET_ACCESS_KEY) for Build to be able to communicate with AWS.
