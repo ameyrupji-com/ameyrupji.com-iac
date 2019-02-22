@@ -39,8 +39,8 @@ data "aws_route53_zone" "static_website_route53_zone" {
 }
 
 resource "aws_route53_record" "static_website_route53_record" {
-  name    = "${var.subdomain}"
-  type    = "A"
+  name = "${var.subdomain}"
+  type = "A"
 
   alias {
     name                   = "${aws_s3_bucket.static_web_hosting_s3_bucket.website_domain}"
