@@ -2,8 +2,8 @@ provider "aws" {
   region = "${var.region}"
 }
 
-module "domain_state" {
-  source = "./modules/state"
+module "domain_iac" {
+  source = "./modules/iac"
 
   domain = "${var.domain}"
 }
