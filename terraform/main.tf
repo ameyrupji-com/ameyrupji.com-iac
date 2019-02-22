@@ -2,11 +2,11 @@ provider "aws" {
   region = "${var.region}"
 }
 
-module "domain_iac" {
-  source = "./modules/iac"
+# module "domain_iac" {
+#   source = "./modules/iac"
 
-  domain = "${var.domain}"
-}
+#   domain = "${var.domain}"
+# }
 
 terraform {
   backend "s3" {
@@ -20,7 +20,7 @@ terraform {
 }
 
 # bucket for domain.com
-module "s3-domain-com" {
+module "s3-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = ""
@@ -29,7 +29,7 @@ module "s3-domain-com" {
 }
 
 # bucket for beta.domain.com
-module "s3-beta-domain-com" {
+module "s3-beta-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "beta"
@@ -38,16 +38,17 @@ module "s3-beta-domain-com" {
 }
 
 # bucket for www.domain.com
-module "s3-www-domain-com" {
-  source = "./modules/s3_web_hosting"
+module "s3-www-domain" {
+  source = "./modules/s3_web_redirect"
 
-  subdomain   = "www"
-  domain      = "${var.domain}"
-  bucket_name = "www.${var.domain}"
+  subdomain            = "www"
+  domain               = "${var.domain}"
+  bucket_name          = "www.${var.domain}"
+  redirect_bucket_name = "${var.domain}"
 }
 
 # bucket for code.domain.com
-module "s3-code-domain-com" {
+module "s3-code-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "code"
@@ -56,7 +57,7 @@ module "s3-code-domain-com" {
 }
 
 # bucket for blog.domain.com
-module "s3-blog-domain-com" {
+module "s3-blog-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "blog"
@@ -65,7 +66,7 @@ module "s3-blog-domain-com" {
 }
 
 # bucket for images.domain.com
-module "s3-images-domain-com" {
+module "s3-images-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "images"
