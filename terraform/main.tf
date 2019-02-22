@@ -11,7 +11,7 @@ module "domain_iac" {
 terraform {
   backend "s3" {
     bucket  = "ameyrupji.com-iac"
-    key     = "/terrafrom/state.tfstate"
+    key     = "terrafrom/state.tfstate"
     region  = "us-east-1"
     encrypt = "true"
   }
