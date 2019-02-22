@@ -5,7 +5,7 @@
 Infrastructure as code for hosting ameyrupji.com in AWS using Terraform
 
 ## Infrastructure
-The following infrastructure is created to host ameyrupji.com
+The following infrastructure is created to host http://www.ameyrupji.com
 - Domain (ameyrupji.com) - Created Manually
 - Hosted zones - automatically created while registering domain
 - S3 Buckets
