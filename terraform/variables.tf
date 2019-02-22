@@ -1,2 +1,5 @@
+variable "region" {
+}
+
 variable "domain" {
 }

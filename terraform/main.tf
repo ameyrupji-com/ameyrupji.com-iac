@@ -1,3 +1,24 @@
+provider "aws" {
+  region = "${var.region}"
+}
+
+module "domain_state" {
+  source = "./modules/state"
+
+  domain = "${var.domain}"
+}
+
+terraform {
+  backend "s3" {
+    bucket        = "ameyrupji.com-iac"
+    key           = "/terrafrom/state.tfstate"
+    region        = "us-east-1"
+    encrypt       = "true"
+  }
+
+  required_version = "0.11.10"
+}
+
 # bucket for domain.com
 module "s3-domain-com" {
   source = "./modules/s3_web_hosting"
@@ -24,8 +45,6 @@ module "s3-www-domain-com" {
   domain                 = "${var.domain}"
   bucket_name            = "www.${var.domain}"
 }
-
-
   
 # bucket for code.domain.com
 module "s3-code-domain-com" {
@@ -44,4 +63,3 @@ module "s3-blog-domain-com" {
   domain                 = "${var.domain}"
   bucket_name            = "blog.${var.domain}"
 }
-
