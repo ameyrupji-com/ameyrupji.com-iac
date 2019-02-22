@@ -44,8 +44,6 @@ apply_job: &apply_job
         name: terraform apply
         command: |
           cd terraform
-          pwd 
-          ls
           terraform apply --auto-approve terraform.plan
 jobs:
   build:
@@ -78,8 +76,6 @@ jobs:
           command: |
             cd terraform
             terraform plan -out=terraform.plan
-            pwd
-            ls
       - persist_to_workspace:
           root: *working_directory
           paths:

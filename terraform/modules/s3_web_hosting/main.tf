@@ -39,7 +39,6 @@ data "aws_route53_zone" "static_website_route53_zone" {
 }
 
 resource "aws_route53_record" "static_website_route53_record" {
-  zone_id = "${data.aws_route53_zone.static_website_route53_zone.zone_id}"
   name    = "${var.subdomain}"
   type    = "A"
 
