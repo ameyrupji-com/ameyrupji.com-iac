@@ -63,7 +63,7 @@ module "s3-blog-domain-com" {
   domain      = "${var.domain}"
   bucket_name = "blog.${var.domain}"
 }
-  
+
 # bucket for images.domain.com
 module "s3-images-domain-com" {
   source = "./modules/s3_web_hosting"
