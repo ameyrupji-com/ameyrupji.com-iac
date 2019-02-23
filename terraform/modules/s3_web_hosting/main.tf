@@ -34,9 +34,14 @@ resource "aws_s3_bucket_policy" "static_web_hosting_s3_bucket_policy" {
 POLICY
 }
 
+data "aws_route53_zone" "static_website_rout53_zone" {
+  name = "${var.domain}."
+}
+
 resource "aws_route53_record" "static_website_route53_record" {
-  name = "${var.subdomain}"
-  type = "A"
+  zone_id = "${data.aws_route53_zone.static_website_rout53_zone.zone_id}"
+  name    = "${var.subdomain}"
+  type    = "A"
 
   alias {
     name                   = "${aws_s3_bucket.static_web_hosting_s3_bucket.website_domain}"

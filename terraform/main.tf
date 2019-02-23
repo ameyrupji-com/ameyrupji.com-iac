@@ -24,6 +24,7 @@ module "s3-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = ""
+  domain      = "${var.domain}"
   bucket_name = "${var.domain}"
 }
 
@@ -32,6 +33,7 @@ module "s3-beta-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "beta"
+  domain      = "${var.domain}"
   bucket_name = "beta.${var.domain}"
 }
 
@@ -48,6 +50,7 @@ module "s3-code-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "code"
+  domain      = "${var.domain}"
   bucket_name = "code.${var.domain}"
 }
 
@@ -56,6 +59,7 @@ module "s3-blog-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "blog"
+  domain      = "${var.domain}"
   bucket_name = "blog.${var.domain}"
 }
 
@@ -64,5 +68,6 @@ module "s3-images-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "images"
+  domain      = "${var.domain}"
   bucket_name = "images.${var.domain}"
 }
