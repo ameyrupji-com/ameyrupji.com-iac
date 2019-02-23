@@ -11,7 +11,7 @@ The following infrastructure is created to host http://www.ameyrupji.com
 - S3 Buckets
   - ameyrupji.com-iac - Created Manually
   - ameyrupji.com
-  - www.ameyrupji.com
+  - w<span>ww.</span>ameyrupji.com
   - beta.ameyrupji.com
   - blog.ameyrupji.com
   - code.ameyrupji.com
