@@ -92,12 +92,18 @@ resource "aws_iam_role" "lambda_exec_email" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "AsumeRole"
+      "Sid": "AsumeRole",
       "Action": "sts:AssumeRole",
       "Principal": {
         "Service": "lambda.amazonaws.com"
       },
       "Effect": "Allow",
+    },
+    {
+      "Sid": "AllowSESAccess",
+      "Effect": "Allow",
+      "Action": "ses:SendEmail",
+      "Resource": "*"
     }
   ]
 }
