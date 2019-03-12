@@ -74,7 +74,7 @@ module "s3-images-domain" {
 
 # email lambda function
 resource "aws_lambda_function" "lambda_function_email" {
-  function_name = "${var.name}-lambda-email"
+  function_name = "${var.domain}-lambda-email"
 
   s3_bucket = "${var.domain}-assets"
   s3_key    = "${var.email-lambda-version}/email.py.zip"
