@@ -97,7 +97,7 @@ resource "aws_iam_role" "lambda_exec_email" {
       "Principal": {
         "Service": "lambda.amazonaws.com"
       },
-      "Effect": "Allow",
+      "Effect": "Allow"
     },
     {
       "Sid": "AllowSESAccess",
