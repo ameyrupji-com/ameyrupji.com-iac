@@ -98,12 +98,6 @@ resource "aws_iam_role" "lambda_exec_email" {
         "Service": "lambda.amazonaws.com"
       },
       "Effect": "Allow",
-    },
-    {
-      "Sid": "AllowSESAccess",
-      "Effect": "Allow",
-      "Action": "ses:SendEmail",
-      "Resource": "*"
     }
   ]
 }
