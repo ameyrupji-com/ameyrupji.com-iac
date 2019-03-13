@@ -78,7 +78,7 @@ resource "aws_lambda_function" "lambda_function_email" {
 
   s3_bucket = "${var.domain}-assets"
   s3_key    = "${var.email-lambda-version}/email-lambda.py.zip"
-  handler   = "lambda_handler"
+  handler   = "email-lambda.lambda_handler"
   runtime   = "python3.7"
 
   role = "${aws_iam_role.lambda_exec_email.arn}"
