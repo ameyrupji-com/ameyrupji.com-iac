@@ -74,18 +74,18 @@ module "s3-images-domain" {
 
 # email lambda function
 resource "aws_lambda_function" "lambda_function_email" {
-  function_name = "${var.name}-lambda-email"
+  function_name = "${var.name}-email-lambda"
 
   s3_bucket = "${var.domain}-assets"
   s3_key    = "${var.email-lambda-version}/email-lambda.py.zip"
-  handler   = "email-lambda"
+  handler   = "lambda_handler"
   runtime   = "python3.7"
 
   role = "${aws_iam_role.lambda_exec_email.arn}"
 }
 
 resource "aws_iam_role" "lambda_exec_email" {
-  name = "${var.name}-lambda-email-role"
+  name = "${var.name}-email-lambda-role"
 
   assume_role_policy = <<EOF
 {
@@ -102,6 +102,63 @@ resource "aws_iam_role" "lambda_exec_email" {
   ]
 }
 EOF
+}
+
+resource "aws_cloudwatch_log_group" "email_lambda_cloudwatch_logs" {
+  name              = "/aws/lambda/${aws_lambda_function.lambda_function_email.function_name}"
+  retention_in_days = 14
+}
+
+resource "aws_iam_policy" "lambda_logging" {
+  name = "lambda_logging"
+  path = "/"
+  description = "IAM policy for logging from a lambda"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*",
+      "Effect": "Allow"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_logs" {
+  role = "${aws_iam_role.lambda_exec_email.name}"
+  policy_arn = "${aws_iam_policy.lambda_logging.arn}"
+}
+
+resource "aws_iam_policy" "ses_access" {
+  name = "ses_send_email_access"
+  path = "/"
+  description = "IAM policy for sending emails from a lambda"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SESSendEmailAccess",
+      "Effect": "Allow",
+      "Action": "ses:SendEmail",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "email_lambda_ses_policy" {
+  role = "${aws_iam_role.lambda_exec_email.name}"
+  policy_arn = "${aws_iam_policy.ses_access.arn}"
 }
 
 # api to send emails
