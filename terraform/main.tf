@@ -110,8 +110,8 @@ resource "aws_cloudwatch_log_group" "email_lambda_cloudwatch_logs" {
 }
 
 resource "aws_iam_policy" "lambda_logging" {
-  name = "lambda_logging"
-  path = "/"
+  name        = "lambda_logging"
+  path        = "/"
   description = "IAM policy for logging from a lambda"
 
   policy = <<EOF
@@ -132,13 +132,13 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role = "${aws_iam_role.lambda_exec_email.name}"
+  role       = "${aws_iam_role.lambda_exec_email.name}"
   policy_arn = "${aws_iam_policy.lambda_logging.arn}"
 }
 
 resource "aws_iam_policy" "ses_access" {
-  name = "ses_send_email_access"
-  path = "/"
+  name        = "ses_send_email_access"
+  path        = "/"
   description = "IAM policy for sending emails from a lambda"
 
   policy = <<EOF
@@ -157,7 +157,7 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "email_lambda_ses_policy" {
-  role = "${aws_iam_role.lambda_exec_email.name}"
+  role       = "${aws_iam_role.lambda_exec_email.name}"
   policy_arn = "${aws_iam_policy.ses_access.arn}"
 }
 
