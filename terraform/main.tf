@@ -98,6 +98,7 @@ resource "aws_iam_role" "lambda_exec_email" {
         "Service": [
           "lambda.amazonaws.com",
           "apigateway.amazonaws.com"
+        ]
       },
       "Effect": "Allow"
     }
