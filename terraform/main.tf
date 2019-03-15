@@ -82,6 +82,8 @@ resource "aws_lambda_function" "lambda_function_email" {
   runtime   = "python3.7"
 
   role = "${aws_iam_role.lambda_exec_email.arn}"
+
+  # source_code_hash = "${base64sha256(file("file.zip"))}"
 }
 
 resource "aws_iam_role" "lambda_exec_email" {
@@ -213,7 +215,7 @@ resource "aws_api_gateway_deployment" "domain_api_gateway_deployment" {
   ]
 
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  stage_name  = ""
+  stage_name  = "prod"
 }
 
 resource "aws_lambda_permission" "email_lambda_api_gateway_permission" {
