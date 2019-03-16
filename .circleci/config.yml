@@ -14,7 +14,7 @@ base_image: &base_image
 working_directory: &working_directory
   ~/ameyrupji
 
-build_config: &default_config
+build_config: &build_config
   docker:
     - image: *build_image
   working_directory: *working_directory
