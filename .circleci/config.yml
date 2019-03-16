@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 references:
 
@@ -6,7 +6,7 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.4
 
 build_image: &build_image
-  circleci/python:3.6
+  circleci/python:latest
 
 base_image: &base_image
   hashicorp/terraform:light
@@ -62,7 +62,7 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: build
+          name: zip lambdas
           command: | 
             cd code/
             python package-lambdas.py
@@ -72,7 +72,7 @@ jobs:
     steps:
       - *restore_repo
       - aws-s3/copy:
-          from: /home/circleci/ameyrupji-lambdas/code/lambdas/zipped/ 
+          from: /home/circleci/ameyrupji/code/lambdas/zipped/ 
           to: 's3://ameyrupji.com-assets/v1.0.0/'
           arguments: --recursive
   build:
