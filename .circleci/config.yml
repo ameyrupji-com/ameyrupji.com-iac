@@ -120,13 +120,13 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
-      - upload
+      - upload:
           requires:
             - zip
-      - build
+      - build:
           requires:
             - upload
-      - plan
+      - plan:
           requires:
             - build
       - approve:
