@@ -119,21 +119,15 @@ workflows:
   version: 2
   build_plan_approve_apply:
     jobs:
-      - zip:
+      - zip
           filters:
-            branches:
-              only: 
-                - master
-      - upload:
+      - upload
           requires:
               - zip
-          filters:
-              branches:
-                only: master
-      - build:
+      - build
         requires:
           - upload
-      - plan:
+      - plan
           requires:
             - build
       - approve:
