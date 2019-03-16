@@ -124,8 +124,8 @@ workflows:
           requires:
               - zip
       - build
-        requires:
-          - upload
+          requires:
+            - upload
       - plan
           requires:
             - build
