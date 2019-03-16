@@ -2,11 +2,22 @@ version: 2
 
 references:
 
+orbs:
+  aws-s3: circleci/aws-s3@1.0.4
+
+build_image: &build_image
+  circleci/python:3.6
+
 base_image: &base_image
   hashicorp/terraform:light
 
 working_directory: &working_directory
   ~/ameyrupji
+
+build_config: &default_config
+  docker:
+    - image: *build_image
+  working_directory: *working_directory
 
 default_config: &default_config
   docker:
@@ -46,10 +57,28 @@ apply_job: &apply_job
           cd terraform
           terraform apply --auto-approve terraform.plan
 jobs:
+  zip:
+    <<: *build_config
+    steps:
+      - checkout
+      - run: 
+          name: build
+          command: | 
+            cd code/
+            python package-lambdas.py
+      - *save_repo
+  upload:
+    <<: *build_config
+    steps:
+      - *restore_repo
+      - aws-s3/copy:
+          from: /home/circleci/ameyrupji-lambdas/code/lambdas/zipped/ 
+          to: 's3://ameyrupji.com-assets/v1.0.0/'
+          arguments: --recursive
   build:
     <<: *default_config
     steps:
-      - checkout
+      - *restore_repo
       - run:
           name: terraform fmt
           command: |
@@ -90,7 +119,20 @@ workflows:
   version: 2
   build_plan_approve_apply:
     jobs:
-      - build
+      - zip:
+          filters:
+            branches:
+              only: 
+                - master
+      - upload:
+          requires:
+              - zip
+          filters:
+              branches:
+                only: master
+      - build:
+        requires:
+          - upload
       - plan:
           requires:
             - build

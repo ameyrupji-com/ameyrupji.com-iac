@@ -73,19 +73,6 @@ module "s3-images-domain" {
 }
 
 # email lambda function
-resource "aws_lambda_function" "lambda_function_email" {
-  function_name = "${var.name}-email-lambda"
-
-  s3_bucket = "${var.domain}-assets"
-  s3_key    = "${var.email-lambda-version}/email-lambda.py.zip"
-  handler   = "email-lambda.lambda_handler"
-  runtime   = "python3.7"
-
-  role = "${aws_iam_role.lambda_exec_email.arn}"
-
-  # source_code_hash = "${base64sha256(file("file.zip"))}"
-}
-
 resource "aws_iam_role" "lambda_exec_email" {
   name = "${var.name}-email-lambda-role"
 
@@ -94,7 +81,7 @@ resource "aws_iam_role" "lambda_exec_email" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "AsumeRole",
+      "Sid": "LambdaAsumeRole",
       "Action": "sts:AssumeRole",
       "Principal": {
         "Service": [
@@ -108,6 +95,21 @@ resource "aws_iam_role" "lambda_exec_email" {
 }
 EOF
 }
+
+resource "aws_lambda_function" "lambda_function_email" {
+  function_name = "${var.name}-email-lambda"
+
+  s3_bucket = "${var.domain}-assets"
+  s3_key    = "${var.email-lambda-version}/email-lambda.py.zip"
+  handler   = "email-lambda.lambda_handler"
+  runtime   = "python3.7"
+
+  role = "${aws_iam_role.lambda_exec_email.arn}"
+
+  source_code_hash = "${base64sha256(file("../code/lambdas/zipped/email-lambda.py.zip"))}"
+}
+
+
 
 resource "aws_cloudwatch_log_group" "email_lambda_cloudwatch_logs" {
   name              = "/aws/lambda/${aws_lambda_function.lambda_function_email.function_name}"
@@ -171,19 +173,6 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
   name        = "${var.name}-api-gateway"
   description = "Api gateway for ${var.domain}"
 }
-
-# resource "aws_api_gateway_resource" "proxy" {
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   parent_id   = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-#   path_part   = "{proxy+}"
-# }
-
-# resource "aws_api_gateway_method" "proxy" {
-#   rest_api_id   = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   resource_id   = "${aws_api_gateway_resource.proxy.id}"
-#   http_method   = "ANY"
-#   authorization = "NONE"
-# }
 
 resource "aws_api_gateway_resource" "email_api_gateway_resource" {
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
