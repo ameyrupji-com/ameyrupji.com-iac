@@ -195,15 +195,14 @@ resource "aws_api_gateway_integration" "email_lambda_api_gateway_integration" {
   uri                     = "${aws_lambda_function.lambda_function_email.invoke_arn}"
 }
 
-resource "aws_api_gateway_integration_response" "MyDemoIntegrationResponse" {
+resource "aws_api_gateway_integration_response" "email_api_gateway_integration_response" {
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
   resource_id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
   http_method = "${aws_api_gateway_method.email_gateway_method.http_method}"
   status_code = "${aws_api_gateway_method_response.email_gateway_method_200.status_code}"
 
   response_templates {
-    "application/json" = <<EOF
-EOF
+    "application/json" = "Empty"
   }
 }
 
