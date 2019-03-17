@@ -12,7 +12,7 @@ base_image: &base_image
   hashicorp/terraform:light
 
 working_directory: &working_directory
-  ~/ameyrupji-iac
+  /home/circleci/ameyrupji-iac
 
 build_config: &build_config
   docker:
@@ -68,7 +68,7 @@ apply_job: &apply_job
     - run:
         name: terraform apply
         command: |
-          cd /home/circleci/ameyrupji-iac/
+          cd /home/circleci/ameyrupji-iac/terraform
           ls
           terraform apply --auto-approve terraform.plan
 jobs:
