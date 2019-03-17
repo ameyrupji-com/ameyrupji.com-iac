@@ -191,7 +191,7 @@ resource "aws_api_gateway_integration" "email_lambda_api_gateway_integration" {
   http_method = "${aws_api_gateway_method.email_gateway_method.http_method}"
 
   integration_http_method = "POST"
-  type                    = "AWS_PROXY"
+  type                    = "HTTP"
   uri                     = "${aws_lambda_function.lambda_function_email.invoke_arn}"
 }
 
