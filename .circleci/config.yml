@@ -55,7 +55,7 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      cd terraform
+      cd /home/circleci/ameyrupji-iac/terraform
       terraform init
 
 apply_job: &apply_job
