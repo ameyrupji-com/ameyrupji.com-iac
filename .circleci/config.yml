@@ -68,6 +68,7 @@ apply_job: &apply_job
     - run:
         name: terraform apply
         command: |
+          ls -la
           cd /home/circleci/ameyrupji-iac/terraform
           terraform apply --auto-approve terraform.plan
 jobs:
