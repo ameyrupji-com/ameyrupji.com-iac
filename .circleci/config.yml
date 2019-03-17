@@ -87,7 +87,7 @@ jobs:
     steps:
       - *restore_build_repo
       - aws-s3/copy:
-          from: ~/ameyrupji-iac/code/lambdas/zipped/ 
+          from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://ameyrupji.com-assets/v1.0.0/'
           arguments: --recursive
       - *save_repo
@@ -98,7 +98,7 @@ jobs:
       - run:
           name: ls
           command: |
-            cd ~/ameyrupji-iac
+            cd /home/circleci/ameyrupji-iac
             pwd
             ls
       - run:
