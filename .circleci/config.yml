@@ -80,6 +80,7 @@ jobs:
           command: | 
             cd code/
             python package-lambdas.py
+            cd ..
       - *save_build_repo
   upload:
     <<: *build_config
@@ -95,8 +96,9 @@ jobs:
     steps:
       - *restore_repo
       - run:
-          name: terraform fmt
+          name: ls
           command: |
+            cd ~/ameyrupji-iac
             pwd
             ls -la
       - run:
