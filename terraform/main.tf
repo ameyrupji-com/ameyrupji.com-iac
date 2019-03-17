@@ -109,8 +109,6 @@ resource "aws_lambda_function" "lambda_function_email" {
   source_code_hash = "${base64sha256(file("../code/lambdas/zipped/email-lambda.py.zip"))}"
 }
 
-
-
 resource "aws_cloudwatch_log_group" "email_lambda_cloudwatch_logs" {
   name              = "/aws/lambda/${aws_lambda_function.lambda_function_email.function_name}"
   retention_in_days = 14
