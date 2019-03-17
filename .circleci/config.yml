@@ -87,7 +87,7 @@ jobs:
     steps:
       - *restore_build_repo
       - aws-s3/copy:
-          from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
+          from: ~/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://ameyrupji.com-assets/v1.0.0/'
           arguments: --recursive
       - *save_repo
@@ -100,7 +100,7 @@ jobs:
           command: |
             cd ~/ameyrupji-iac
             pwd
-            ls -la
+            ls
       - run:
           name: terraform fmt
           command: |
