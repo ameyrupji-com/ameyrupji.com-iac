@@ -68,7 +68,7 @@ apply_job: &apply_job
     - run:
         name: terraform apply
         command: |
-          cd terraform
+          cd /home/circleci/ameyrupji-iac/terraform
           terraform apply --auto-approve terraform.plan
 jobs:
   zip:
@@ -123,7 +123,7 @@ jobs:
       - persist_to_workspace:
           root: *working_directory
           paths:
-            - terraform/terraform.plan
+            - /home/circleci/ameyrupji-iac/terraform/terraform.plan
   apply:
     <<: *apply_job
   apply-with-approval:
