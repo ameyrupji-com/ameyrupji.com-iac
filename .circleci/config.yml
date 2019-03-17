@@ -97,7 +97,11 @@ jobs:
       - run:
           name: terraform fmt
           command: |
-            ls 
+            pwd
+            ls -la
+      - run:
+          name: terraform fmt
+          command: |
             cd terraform
             if [ $(terraform fmt | grep -v .terraform | tee fmt_result.txt | wc -l) -gt 0 ]; then
               echo "Format of this terraform files is not appropiate:"
