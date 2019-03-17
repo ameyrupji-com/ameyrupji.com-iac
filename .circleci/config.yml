@@ -96,15 +96,9 @@ jobs:
     steps:
       - *restore_repo
       - run:
-          name: ls
-          command: |
-            cd /home/circleci/ameyrupji-iac
-            pwd
-            ls
-      - run:
           name: terraform fmt
           command: |
-            cd terraform
+            cd /home/circleci/ameyrupji-iac/terraform
             if [ $(terraform fmt | grep -v .terraform | tee fmt_result.txt | wc -l) -gt 0 ]; then
               echo "Format of this terraform files is not appropiate:"
               echo
@@ -124,7 +118,7 @@ jobs:
       - run:
           name: terraform plan
           command: |
-            cd terraform
+            cd /home/circleci/ameyrupji-iac/terraform
             terraform plan -out=terraform.plan
       - persist_to_workspace:
           root: *working_directory
