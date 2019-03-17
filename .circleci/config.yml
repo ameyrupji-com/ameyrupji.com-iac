@@ -122,9 +122,9 @@ jobs:
             ls -la
             terraform plan -out=terraform.plan
       - persist_to_workspace:
-          root: *working_directory
+          root: /home/circleci/ameyrupji-iac/terraform
           paths:
-            - /terraform/terraform.plan
+            - terraform.plan
   apply:
     <<: *apply_job
   apply-with-approval:
