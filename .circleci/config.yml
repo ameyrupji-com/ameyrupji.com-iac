@@ -45,7 +45,7 @@ save_repo: &save_repo
     paths:
       - *working_directory
 
-save_build_repo: &save_repo
+save_build_repo: &save_build_repo
   save_cache:
     key: *build_repo_cache_key
     paths:
