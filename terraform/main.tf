@@ -233,13 +233,15 @@ resource "aws_api_gateway_deployment" "domain_api_gateway_deployment" {
   stage_name  = "prod"
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_lambda_permission" "email_lambda_api_gateway_permission" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
   function_name = "${aws_lambda_function.lambda_function_email.arn}"
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_rest_api.domain_api_gateway.id}/*/${aws_api_gateway_method.email_gateway_method.http_method}/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
+  source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_deployment.domain_api_gateway_deployment.rest_api_id}/*/POST/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
 }
 
 # data "aws_route53_zone" "static_website_rout53_zone" {
