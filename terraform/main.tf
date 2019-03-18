@@ -257,13 +257,13 @@ resource "aws_api_gateway_domain_name" "api_gateway_domain_name" {
 }
 
 resource "aws_route53_record" "api_gateway_route53_record" {
-  name    = "${aws_api_gateway_domain_name.api_gateway_domain_name.domain_name}"
+  zone_id = "${data.aws_route53_zone.static_website_rout53_zone.zone_id}"
+  name    = "api"
   type    = "A"
-  zone_id = "${aws_route53_zone.static_website_rout53_zone.zone_id}"
-
+  
   alias {
-    evaluate_target_health = true
     name                   = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_domain_name}"
     zone_id                = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_zone_id}"
+    evaluate_target_health = true
   }
 }
