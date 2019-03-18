@@ -248,22 +248,18 @@ data "aws_route53_zone" "static_website_rout53_zone" {
   name = "${var.domain}."
 }
 
-
 resource "aws_api_gateway_domain_name" "api_gateway_domain_name" {
   domain_name = "api.${var.domain}"
-
 
   endpoint_configuration {
     types = ["REGIONAL"]
   }
 }
 
-
 resource "aws_route53_record" "api_gateway_route53_record" {
   name    = "${aws_api_gateway_domain_name.api_gateway_domain_name.domain_name}"
   type    = "A"
   zone_id = "${aws_route53_zone.static_website_rout53_zone.zone_id}"
-
 
   alias {
     evaluate_target_health = true
@@ -271,4 +267,3 @@ resource "aws_route53_record" "api_gateway_route53_record" {
     zone_id                = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_zone_id}"
   }
 }
-
