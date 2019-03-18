@@ -260,7 +260,7 @@ resource "aws_route53_record" "api_gateway_route53_record" {
   zone_id = "${data.aws_route53_zone.static_website_rout53_zone.zone_id}"
   name    = "api"
   type    = "A"
-  
+
   alias {
     name                   = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_domain_name}"
     zone_id                = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_zone_id}"
