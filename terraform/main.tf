@@ -239,7 +239,7 @@ resource "aws_lambda_permission" "email_lambda_api_gateway_permission" {
   function_name = "${aws_lambda_function.lambda_function_email.arn}"
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_deployment.domain_api_gateway_deployment.execution_arn}/*/*"
+  source_arn = "${aws_api_gateway_deployment.domain_api_gateway_deployment.execution_arn}/*/*/*"
 }
 
 # data "aws_route53_zone" "static_website_rout53_zone" {
