@@ -248,9 +248,14 @@ data "aws_route53_zone" "static_website_rout53_zone" {
   name = "${var.domain}."
 }
 
+data "aws_acm_certificate" "domain_certificate" {
+  domain   = "*.${var.domain}"
+  statuses = ["ISSUED"]
+}
+
 resource "aws_api_gateway_domain_name" "api_gateway_domain_name" {
   domain_name = "api.${var.domain}"
-
+  regional_certificate_arn = "${data.aws_acm_certificate.domain_certificate.arn}"
   endpoint_configuration {
     types = ["REGIONAL"]
   }
@@ -267,3 +272,4 @@ resource "aws_route53_record" "api_gateway_route53_record" {
     evaluate_target_health = true
   }
 }
+
