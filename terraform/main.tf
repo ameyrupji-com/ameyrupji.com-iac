@@ -1,34 +1,49 @@
-provider "aws" {
-  region = "${var.region}"
-}
-
-# module "domain_iac" {
-#   source = "./modules/iac"
-
-#   domain = "${var.domain}"
-# }
-
-terraform {
-  backend "s3" {
-    bucket  = "ameyrupji.com-iac"
-    key     = "terrafrom/state.tfstate"
-    region  = "us-east-1"
-    encrypt = "true"
-  }
-
-  required_version = "0.11.10"
-}
 
 # bucket for domain.com
 module "s3-domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = ""
+  subdomain   = "${var.main-subdomain}"
   domain      = "${var.domain}"
   bucket_name = "${var.domain}"
 }
 
-# bucket for beta.domain.com
+# bucket for www.domain.com
+module "s3-www-domain" {
+  source = "./modules/s3_web_redirect"
+
+  bucket_name          = "${altername-subdomain}.${var.domain}"
+  redirect_bucket_name = "${var.domain}"
+}
+
+# bucket for code.domain.com
+module "s3-code-domain" {
+  source = "./modules/s3_web_hosting"
+
+  subdomain   = "${var.code-subdomain}"
+  domain      = "${var.domain}"
+  bucket_name = "${var.code-subdomain}.${var.domain}"
+}
+
+# bucket for blog.domain.com
+module "s3-blog-domain" {
+  source = "./modules/s3_web_hosting"
+
+  subdomain   = "${var.blog-subdomain}"
+  domain      = "${var.domain}"
+  bucket_name = "${var.blog-subdomain}.${var.domain}"
+}
+
+# bucket for images.domain.com
+module "s3-images-domain" {
+  source = "./modules/s3_web_hosting"
+
+  subdomain   = "${var.images-subdomain}"
+  domain      = "${var.domain}"
+  bucket_name = "${var.images-subdomain}.${var.domain}"
+}
+
+# TODO remove this: bucket for beta.domain.com
 module "s3-beta-domain" {
   source = "./modules/s3_web_hosting"
 
@@ -37,40 +52,6 @@ module "s3-beta-domain" {
   bucket_name = "beta.${var.domain}"
 }
 
-# bucket for www.domain.com
-module "s3-www-domain" {
-  source = "./modules/s3_web_redirect"
-
-  bucket_name          = "www.${var.domain}"
-  redirect_bucket_name = "${var.domain}"
-}
-
-# bucket for code.domain.com
-module "s3-code-domain" {
-  source = "./modules/s3_web_hosting"
-
-  subdomain   = "code"
-  domain      = "${var.domain}"
-  bucket_name = "code.${var.domain}"
-}
-
-# bucket for blog.domain.com
-module "s3-blog-domain" {
-  source = "./modules/s3_web_hosting"
-
-  subdomain   = "blog"
-  domain      = "${var.domain}"
-  bucket_name = "blog.${var.domain}"
-}
-
-# bucket for images.domain.com
-module "s3-images-domain" {
-  source = "./modules/s3_web_hosting"
-
-  subdomain   = "images"
-  domain      = "${var.domain}"
-  bucket_name = "images.${var.domain}"
-}
 
 # email lambda function
 resource "aws_iam_role" "lambda_exec_email" {
@@ -100,7 +81,7 @@ resource "aws_lambda_function" "lambda_function_email" {
   function_name = "${var.name}-email-lambda"
 
   s3_bucket = "${var.domain}-assets"
-  s3_key    = "${var.email-lambda-version}/email-lambda.py.zip"
+  s3_key    = "${var.lambda-version}/email-lambda.py.zip"
   handler   = "email-lambda.lambda_handler"
   runtime   = "python3.7"
 
