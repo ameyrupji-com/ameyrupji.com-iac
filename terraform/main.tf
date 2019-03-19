@@ -42,15 +42,6 @@ module "s3-images-domain" {
   bucket_name = "${var.images-subdomain}.${var.domain}"
 }
 
-# TODO remove this: bucket for beta.domain.com
-module "s3-beta-domain" {
-  source = "./modules/s3_web_hosting"
-
-  subdomain   = "beta"
-  domain      = "${var.domain}"
-  bucket_name = "beta.${var.domain}"
-}
-
 # email lambda function
 resource "aws_iam_role" "lambda_exec_email" {
   name = "${var.name}-email-lambda-role"
