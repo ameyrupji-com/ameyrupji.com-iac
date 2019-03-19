@@ -1,4 +1,3 @@
-
 # bucket for domain.com
 module "s3-domain" {
   source = "./modules/s3_web_hosting"
@@ -51,7 +50,6 @@ module "s3-beta-domain" {
   domain      = "${var.domain}"
   bucket_name = "beta.${var.domain}"
 }
-
 
 # email lambda function
 resource "aws_iam_role" "lambda_exec_email" {

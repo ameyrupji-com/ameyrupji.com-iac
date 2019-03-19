@@ -17,5 +17,3 @@ variable "code-subdomain" {}
 variable "blog-subdomain" {}
 
 variable "images-subdomain" {}
-
-
