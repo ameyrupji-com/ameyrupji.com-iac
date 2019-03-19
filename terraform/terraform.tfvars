@@ -12,7 +12,7 @@ images-subdomain = "images"
 
 
 # main-subdomain = "beta"
-# altername-subdomain = "www-beta"
+# alternate-subdomain = "www-beta"
 # api-subdomain = "api-beta"
 # code-subdomain = "code-beta"
 # blog-subdomain = "blog-beta"
