@@ -4,7 +4,7 @@ domain = "ameyrupji.com"
 lambda-version = "v1.0.0"
 
 main-subdomain = ""
-altername-subdomain = "www"
+alternate-subdomain = "www"
 api-subdomain = "api"
 code-subdomain = "code"
 blog-subdomain = "blog"

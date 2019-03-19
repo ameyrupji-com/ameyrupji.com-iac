@@ -11,7 +11,7 @@ module "s3-domain" {
 module "s3-www-domain" {
   source = "./modules/s3_web_redirect"
 
-  bucket_name          = "${altername-subdomain}.${var.domain}"
+  bucket_name          = "${alternate-subdomain}.${var.domain}"
   redirect_bucket_name = "${var.domain}"
 }
 
