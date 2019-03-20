@@ -56,6 +56,10 @@ terraform_init: &terraform_init
     name: terraform init
     command: |
       cd /home/circleci/ameyrupji-iac/terraform
+      ls -la
+      mkdir workspace
+      cp -r src/. environments/{{ .Branch }}/. workspace
+      cd workspace
       terraform init
 
 apply_job: &apply_job
@@ -69,7 +73,10 @@ apply_job: &apply_job
         name: terraform apply
         command: |
           cd /home/circleci/ameyrupji-iac/terraform
-          ls
+          ls -la
+          mkdir workspace
+          cp -r src/. environments/{{ .Branch }}/. workspace
+          cd workspace
           terraform apply --auto-approve terraform.plan
 jobs:
   zip:
@@ -121,11 +128,14 @@ jobs:
           command: |
             cd /home/circleci/ameyrupji-iac/terraform
             ls -la
+            mkdir workspace
+            cp -r src/. environments/{{ .Branch }}/. workspace
+            cd workspace
             terraform plan -out=terraform.plan
       - persist_to_workspace:
           root: /home/circleci/ameyrupji-iac/
           paths:
-            - terraform/terraform.plan
+            - terraform/workspace/terraform.plan
   apply:
     <<: *apply_job
   apply-with-approval:
