@@ -16,7 +16,7 @@ variable "code-subdomain" {}
 
 variable "blog-subdomain" {}
 
-variable "images-subdomain-bucket" {}
+variable "images-subdomain" {}
 
 variable "main-subdomain-bucket" {}
 
