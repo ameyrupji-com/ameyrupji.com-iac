@@ -31,6 +31,7 @@ Alternate Subdomain | www | www.beta
 Blog Subdomain | blog | blog-beta
 Code Subdomain | code | code-beta
 Images Subdomain | images | images-beta
+- [ ] Api Gateway with domain (api) for sending emails as POST request through the UI.
 - [ ] Cloud Front CDN for ameyrupji.com
 - [ ] DynamoDB table to Terraform State
 

@@ -1,45 +1,45 @@
-# bucket for domain.com
+# bucket for main subdomain 
 module "s3-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "${var.main-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.domain}"
+  bucket_name = "${var.main-subdomain-bucket}"
 }
 
-# bucket for www.domain.com
+# bucket for alternate subdomain
 module "s3-www-domain" {
   source = "./modules/s3_web_redirect"
 
-  bucket_name          = "${var.alternate-subdomain}.${var.domain}"
+  bucket_name          = "${var.alternate-subdomain-bucket}"
   redirect_bucket_name = "${var.domain}"
 }
 
-# bucket for code.domain.com
+# bucket for code subdomain
 module "s3-code-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "${var.code-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.code-subdomain}.${var.domain}"
+  bucket_name = "${var.code-subdomain-bucket}"
 }
 
-# bucket for blog.domain.com
+# bucket for blog subdomain
 module "s3-blog-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "${var.blog-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.blog-subdomain}.${var.domain}"
+  bucket_name = "${var.blog-subdomain-bucket}"
 }
 
-# bucket for images.domain.com
+# bucket for images subdomain
 module "s3-images-domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "${var.images-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.images-subdomain}.${var.domain}"
+  bucket_name = "${var.images-subdomain-bucket}"
 }
 
 # # email lambda function
