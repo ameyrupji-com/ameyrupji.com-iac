@@ -76,7 +76,7 @@ resource "aws_lambda_function" "lambda_function_email" {
 
   role = "${aws_iam_role.lambda_exec_email.arn}"
 
-  source_code_hash = "${base64sha256(file("../code/lambdas/zipped/email-lambda.py.zip"))}"
+  source_code_hash = "${base64sha256(file("../../code/lambdas/zipped/email-lambda.py.zip"))}"
 }
 
 resource "aws_cloudwatch_log_group" "email_lambda_cloudwatch_logs" {
