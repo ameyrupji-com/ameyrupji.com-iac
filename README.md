@@ -2,38 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/ameyrupji/ameyrupji.com-iac.svg?style=svg)](https://circleci.com/gh/ameyrupji/ameyrupji.com-iac)
 
-Infrastructure As Code (iac) for hosting ameyrupji.com in AWS using Terraform
+Infrastructure As Code (iac) for hosting ameyrupji.com in AWS using Terraform. This repository createds the necessary AWS infastructure enables quick deployment and easy testability in beta environment before the code can be promoted to the live website. The builds are triggered through CircleCI integration of this repository.
 
-## Infrastructure
-The following infrastructure is created to host http://www.ameyrupji.com
-- Domain (ameyrupji.com) - Created Manually
-- S3 Buckets - Created Manually
-  - ameyrupji.com-iac
-  - ameyrupji.com-assets
-- Hosted zones - automatically created while registering domain
-- Certificate through ACM for *.ameyrupji.com - Created Manually
-- Two different environments are maintained prod and beta. In each of these environments the following buckets are created:
-
-Bucket Use | Prod Bucket Name | Beta Bucket Name
---- | --- | --- 
-Main Subdomain | ameyrupji.com | beta.ameyrupji.com
-Alternate Subdomain | www.ameyrupji.com | www.beta.ameyrupji.com
-Blog Subdomain | blog.ameyrupji.com | blog-beta.ameyrupji.com
-Code Subdomain | code.ameyrupji.com | code-beta.ameyrupji.com
-Images Subdomain | images.ameyrupji.com | images-beta.ameyrupji.com
-
-- Hosted Zones Record Sets
-
-Record Set Use | Prod Record Set Name | Beta Record Set Name
---- | --- | --- 
-Main Subdomain |  | beta
-Alternate Subdomain | www | www.beta
-Blog Subdomain | blog | blog-beta
-Code Subdomain | code | code-beta
-Images Subdomain | images | images-beta
-- [ ] Api Gateway with domain (api) for sending emails as POST request through the UI.
-- [ ] Cloud Front CDN for ameyrupji.com
-- [ ] DynamoDB table to Terraform State
+Please fell free to use any part of this repository. If you find this useful please dont forget to Star or Folk this repository. If there are things that you would like me to improve in this code feel free to point it out by creating an Issue.  
 
 ### Daigram
 ![Infrastructure Diagram](/images/ameyrupji.com-blueprint.png)
@@ -41,6 +12,48 @@ Images Subdomain | images | images-beta
 Link:
 https://cloudcraft.co/view/a84a92f3-0147-42eb-be3e-bc849d99d6d6?key=7EtAxVRr-L84VOa7CFUsWA&embed=true
 
+## Infrastructure
+The following infrastructure needs to be created to host http://www.ameyrupji.com.
+
+### Initial Setup
+This needs to be done manually before you can run the terraform code below:
+
+- Buy/Register ameyrupji.com domain through Route53 Service using the portal.
+- Create the following S3 Buckets using the portal
+  - ameyrupji.com-iac - Stores the terraform state files.
+  - ameyrupji.com-assets - Stores the assets.
+- Hosted zones should automatically created while registering domain.
+- Create a certificate for *.ameyrupji.com through ACM Servie usijng the portal.
+
+### Created through Terraform 
+Two different environments are maintained **prod** and **beta**. For each of these environments the following resources are created:
+
+- S3 Buckets
+
+Bucket Use | Prod Bucket Name | Beta Bucket Name
+--- | --- | --- 
+Main Subdomain | ameyrupji.com | beta.ameyrupji.com
+Alternate Subdomain | www.ameyrupji.com | www.beta.ameyrupji.com
+Blog Subdomain | blog.ameyrupji.com | blog.beta.ameyrupji.com
+Code Subdomain | code.ameyrupji.com | code.beta.ameyrupji.com
+Images Subdomain | images.ameyrupji.com | images.beta.ameyrupji.com
+
+- Hosted Zones Record Sets
+
+Record Set Use | Prod Record Set Name | Beta Record Set Name
+--- | --- | --- 
+Main Subdomain |  | beta
+Alternate Subdomain | www | www.beta
+Blog Subdomain | blog | blog.beta
+Code Subdomain | code | code.beta
+Images Subdomain | images | images.beta
+
+#### TODOs:
+
+- [ ] Api Gateway with domain (api) for sending emails as POST request through the UI.
+- [ ] Lambda code as Git Submodule + Build changes.
+- [ ] Cloud Front CDN for ameyrupji.com.
+- [ ] Upgrade state to store in DynamoDB table to Terraform State.
 
 ## Prerequisites
 - [x] User for programatic AdminAccess (cli-user)
