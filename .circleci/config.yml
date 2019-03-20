@@ -81,8 +81,6 @@ apply_job: &apply_job
         command: |
           cd /home/circleci/ameyrupji-iac/terraform
           ls -la
-          mkdir workspace
-          cp -r src/. environments/${ENVIRON}/. workspace
           cd workspace
           terraform apply --auto-approve terraform.plan
 jobs:
@@ -136,8 +134,6 @@ jobs:
           command: |
             cd /home/circleci/ameyrupji-iac/terraform
             ls -la
-            mkdir workspace
-            cp -r src/. environments/${ENVIRON}/. workspace
             cd workspace
             terraform plan -out=terraform.plan
       - persist_to_workspace:
