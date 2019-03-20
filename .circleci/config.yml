@@ -51,7 +51,7 @@ save_build_repo: &save_build_repo
     paths:
       - *working_directory
 
-setup_environment:
+setup_environment: &setup_environment
   run:
     name: Setup common environment variables
     command: |
