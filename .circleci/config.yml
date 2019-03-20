@@ -51,21 +51,18 @@ save_build_repo: &save_build_repo
     paths:
       - *working_directory
 
-setup_environment: &setup_environment
-  run:
-    name: Setup common environment variables
-    command: |
-      [[ $CIRCLE_BRANCH = "master" ]] && ENV="prod" || ENV="beta"
-      echo 'export ENVIRON="$ENV"' >> $BASH_ENV
-
 terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
+      [[ $CIRCLE_BRANCH = "master" ]] && $ENV="prod" || $ENV="beta"
+      echo "ENVIRON variable:"
+      echo $ENV
       cd /home/circleci/ameyrupji-iac/terraform
       mkdir workspace
-      echo $ENVIRON
-      cp -r src/. environments/$ENVIRON/. workspace
+      echo "ENVIRON variable:"
+      echo ${ENVIRON}
+      cp -r src/. environments/$ENV/. workspace
       cd workspace
       ls -la
       terraform init
@@ -128,7 +125,6 @@ jobs:
     <<: *default_config
     steps:
       - *restore_repo
-      - *setup_environment
       - *terraform_init
       - run:
           name: terraform plan
