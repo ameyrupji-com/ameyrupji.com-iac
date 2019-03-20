@@ -58,11 +58,11 @@ terraform_init: &terraform_init
       [[ $CIRCLE_BRANCH = "master" ]] && ENV="prod" || ENV="beta"
       echo "ENV:"
       echo $ENV
-      SET ENV_DIRECORY = "environments/$ENV/."
-      echo $ENV_DIRECORY
+      ENV_DIRECTORY = "environments/$ENV/."
+      echo $ENV_DIRECTORY
       cd /home/circleci/ameyrupji-iac/terraform
       mkdir workspace
-      cp -r src/. "$ENV_DIRECORY" workspace/
+      cp -r src/. "$ENV_DIRECTORY" workspace/
       cd workspace
       ls -la
       terraform init
