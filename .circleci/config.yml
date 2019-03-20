@@ -55,7 +55,7 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      [[ $CIRCLE_BRANCH = "master" ]] && $ENV="prod" || $ENV="beta"
+      [[ $CIRCLE_BRANCH = "master" ]] && ENV="prod" || ENV="beta"
       echo "ENVIRON variable:"
       echo $ENV
       cd /home/circleci/ameyrupji-iac/terraform
