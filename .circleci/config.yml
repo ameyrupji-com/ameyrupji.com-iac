@@ -64,7 +64,8 @@ terraform_init: &terraform_init
     command: |
       cd /home/circleci/ameyrupji-iac/terraform
       mkdir workspace
-      cp -r src/. environments/${ENVIRON}/. workspace
+      echo $ENVIRON
+      cp -r src/. environments/$ENVIRON/. workspace
       cd workspace
       ls -la
       terraform init
