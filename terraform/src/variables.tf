@@ -16,14 +16,14 @@ variable "blog-subdomain" {}
 
 variable "images-subdomain" {}
 
-variable "main-subdomain-bucket" {}
+variable "main-domain" {}
 
-variable "alternate-subdomain-bucket" {}
+variable "alternate-domain" {}
 
-variable "code-subdomain-bucket" {}
+variable "code-domain" {}
 
-variable "blog-subdomain-bucket" {}
+variable "blog-domain" {}
 
-variable "images-subdomain-bucket" {}
+variable "images-domain" {}
 
 variable "api-subdomain" {}

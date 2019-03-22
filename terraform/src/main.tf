@@ -4,15 +4,15 @@ module "s3-domain" {
 
   subdomain   = "${var.main-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.main-subdomain-bucket}"
+  bucket_name = "${var.main-domain}"
 }
 
 # bucket for alternate subdomain
 module "s3-www-domain" {
   source = "./modules/s3_web_redirect"
 
-  bucket_name          = "${var.alternate-subdomain-bucket}"
-  redirect_bucket_name = "${var.domain}"
+  bucket_name          = "${var.alternate-domain}"
+  redirect_bucket_name = "${var.main-domain}"
 }
 
 # bucket for code subdomain
@@ -21,7 +21,7 @@ module "s3-code-domain" {
 
   subdomain   = "${var.code-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.code-subdomain-bucket}"
+  bucket_name = "${var.code-domain}"
 }
 
 # bucket for blog subdomain
@@ -30,7 +30,7 @@ module "s3-blog-domain" {
 
   subdomain   = "${var.blog-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.blog-subdomain-bucket}"
+  bucket_name = "${var.blog-domain}"
 }
 
 # bucket for images subdomain
@@ -39,7 +39,7 @@ module "s3-images-domain" {
 
   subdomain   = "${var.images-subdomain}"
   domain      = "${var.domain}"
-  bucket_name = "${var.images-subdomain-bucket}"
+  bucket_name = "${var.images-domain}"
 }
 
 # # email lambda function
