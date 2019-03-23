@@ -27,3 +27,15 @@ variable "blog-domain" {}
 variable "images-domain" {}
 
 variable "api-subdomain" {}
+
+variable "api-domain" {}
+
+variable "certificate-domain" {}
+
+variable "lambda-version" {}
+
+variable "email-lambda-name" {}
+
+variable "email-lambda-file-name" {}
+
+variable "assets-bucket-name" {}

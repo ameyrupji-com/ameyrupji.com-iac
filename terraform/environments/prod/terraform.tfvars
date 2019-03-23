@@ -2,6 +2,7 @@ region = "us-east-1"
 name = "ameyrupji"
 domain = "ameyrupji.com"
 lambda-version = "v1.0.0"
+assets-bucket-name = "ameyrupji.com-assets"
 
 main-subdomain = ""
 alternate-subdomain = "www"
@@ -16,3 +17,6 @@ blog-domain = "blog.ameyrupji.com"
 images-domain = "images.ameyrupji.com"
 
 api-subdomain = "api"
+api-domain = "api.ameyrupji.com"
+
+certificate-domain = "*.ameyrupji.com"
