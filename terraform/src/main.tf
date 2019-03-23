@@ -58,7 +58,7 @@ module "email_lambda" {
   source = "./modules/api_lambda_with_logging"
 
   lambda-name      = "${var.email-lambda-name}"
-  lanbda-file-name = "${var.email-lambda-file-name}"
+  lambda-file-name = "${var.email-lambda-file-name}"
 
   lambda-version     = "${var.lambda-version}"
   assets-bucket-name = "${var.assets-bucket-name}"
