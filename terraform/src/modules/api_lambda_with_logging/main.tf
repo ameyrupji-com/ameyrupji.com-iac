@@ -67,10 +67,10 @@ resource "aws_iam_role_policy_attachment" "lambda_iam_role_policy_attachment_log
 }
 
 resource "aws_iam_policy" "custom_iam_policy" {
-  name        = "${var.custom-policy.name}"
+  name        = "${var.custom-policy["name"]}"
   path        = "/"
-  description = "${var.custom-policy.description}"
-  policy      = "${var.custom-policy.document}"
+  description = "${var.custom-policy["description"]}"
+  policy      = "${var.custom-policy["document"]}"
 }
 
 resource "aws_iam_role_policy_attachment" "custom_iam_role_policy_attachment" {
