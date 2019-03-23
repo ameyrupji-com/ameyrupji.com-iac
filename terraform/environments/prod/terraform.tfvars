@@ -20,3 +20,6 @@ api-subdomain = "api"
 api-domain = "api.ameyrupji.com"
 
 certificate-domain = "*.ameyrupji.com"
+
+email-lambda-name = "post-email"
+email-lambda-file-name = "email-lambda"
