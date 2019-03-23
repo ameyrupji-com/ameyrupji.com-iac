@@ -66,7 +66,8 @@ module "email_lambda" {
   custom-policy = {
     name        = "${var.email-lambda-name}-ses-send-email-access"
     description = "SES email policy"
-    document    = <<EOF
+
+    document = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
