@@ -68,7 +68,6 @@ module "email_lambda" {
     description = "SES email policy"
     document    = "${data.aws_iam_policy_document.ses_send_iam_policy_document.json}"
   }
-
 }
 
 # # api to send emails
