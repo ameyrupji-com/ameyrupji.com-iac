@@ -30,7 +30,7 @@ resource "aws_lambda_function" "lambda_function" {
 
   role = "${aws_iam_role.lambda_exec_iam_role.arn}"
 
-  source_code_hash = "${base64sha256(file("../../../code/lambdas/zipped/${var.lambda-file-name}.py.zip"))}"
+  source_code_hash = "${base64sha256(file("../../code/lambdas/zipped/${var.lambda-file-name}.py.zip"))}"
 }
 
 resource "aws_cloudwatch_log_group" "lambda_cloudwatch_log_group" {
