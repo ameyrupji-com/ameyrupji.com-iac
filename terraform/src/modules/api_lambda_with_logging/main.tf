@@ -70,7 +70,7 @@ resource "aws_iam_policy" "custom_iam_policy" {
   name        = "${var.custom-policy["name"]}"
   path        = "/"
   description = "${var.custom-policy["description"]}"
-  policy      = "${var.custom-policy["document"]}"
+  policy      = "${var.custom-policy["document"].json}"
 }
 
 resource "aws_iam_role_policy_attachment" "custom_iam_role_policy_attachment" {
