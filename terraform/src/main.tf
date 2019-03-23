@@ -63,7 +63,7 @@ module "email_lambda" {
   lambda-version     = "${var.lambda-version}"
   assets-bucket-name = "${var.assets-bucket-name}"
 
-  custom_policy = {
+  custom-policy = {
     name        = "${var.email-lambda-name}-ses-send-email-access"
     description = "SES email policy"
     document    = "${data.aws_iam_policy_document.ses_send_iam_policy_document.json}"
