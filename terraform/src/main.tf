@@ -66,7 +66,19 @@ module "email_lambda" {
   custom-policy = {
     name        = "${var.email-lambda-name}-ses-send-email-access"
     description = "SES email policy"
-    document    = "${data.aws_iam_policy_document.ses_send_iam_policy_document}"
+    document    = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SESSendEmailAccess",
+      "Effect": "Allow",
+      "Action": "ses:SendEmail",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
   }
 }
 
