@@ -75,5 +75,5 @@ resource "aws_iam_policy" "custom_iam_policy" {
 
 resource "aws_iam_role_policy_attachment" "custom_iam_role_policy_attachment" {
   role       = "${aws_iam_role.lambda_exec_iam_role.name}"
-  policy_arn = "${aws_iam_policy.ses_access.arn}"
+  policy_arn = "${aws_iam_policy.custom_iam_policy.arn}"
 }

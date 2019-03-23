@@ -32,8 +32,6 @@ variable "api-domain" {}
 
 variable "certificate-domain" {}
 
-variable "lambda-version" {}
-
 variable "email-lambda-name" {}
 
 variable "email-lambda-file-name" {}

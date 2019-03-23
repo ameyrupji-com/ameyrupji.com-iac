@@ -2,7 +2,7 @@ variable "lambda-name" {}
 
 variable "lambda-version" {}
 
-variable "lanbda-file-name" {}
+variable "lambda-file-name" {}
 
 variable "assets-bucket-name" {}
 
