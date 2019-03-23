@@ -45,14 +45,14 @@ module "s3_images_domain" {
 }
 
 # email lambda function
-data "aws_iam_policy_document" "ses_send_iam_policy_document" {
-  statement {
-    sid       = "SESSendEmail"
-    effect    = "Allow"
-    actions   = ["ses:SendEmail"]
-    resources = "*"
-  }
-}
+# data "aws_iam_policy_document" "ses_send_iam_policy_document" {
+#   statement {
+#     sid       = "SESSendEmail"
+#     effect    = "Allow"
+#     actions   = ["ses:SendEmail"]
+#     resources = "*"
+#   }
+# }
 
 module "email_lambda" {
   source = "./modules/api_lambda_with_logging"
