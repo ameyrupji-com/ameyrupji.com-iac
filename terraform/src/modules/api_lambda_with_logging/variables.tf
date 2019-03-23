@@ -7,5 +7,5 @@ variable "lanbda-file-name" {}
 variable "assets-bucket-name" {}
 
 variable "custom-policy" {
-  type = "object"
+  type = "map"
 }
