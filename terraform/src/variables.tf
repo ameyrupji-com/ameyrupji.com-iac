@@ -26,9 +26,13 @@ variable "blog-domain" {}
 
 variable "images-domain" {}
 
+variable "api-gateway-name" {}
+
 variable "api-subdomain" {}
 
 variable "api-domain" {}
+
+variable "api-gateway-stage-name" {}
 
 variable "certificate-domain" {}
 

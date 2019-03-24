@@ -16,8 +16,10 @@ code-domain = "code.ameyrupji.com"
 blog-domain = "blog.ameyrupji.com"
 images-domain = "images.ameyrupji.com"
 
-api-subdomain = "api"
+api-gateway-name = "ameyrupji"
+api-subdomain = "api."
 api-domain = "api.ameyrupji.com"
+api-gateway-stage-name = "prod"
 
 certificate-domain = "*.ameyrupji.com"
 

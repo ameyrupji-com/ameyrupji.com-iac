@@ -73,121 +73,30 @@ EOF
   }
 }
 
-# # api to send emails
-# resource "aws_api_gateway_rest_api" "domain_api_gateway" {
-#   name        = "${var.name}-api-gateway"
-#   description = "Api gateway for api.${var.domain}"
-# }
-
-# resource "aws_api_gateway_resource" "email_api_gateway_resource" {
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   parent_id   = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-#   path_part   = "email"
-# }
-
-# resource "aws_api_gateway_method" "email_gateway_method" {
-#   rest_api_id   = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   resource_id   = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
-#   http_method   = "POST"
-#   authorization = "NONE"
-# }
-
-# resource "aws_api_gateway_integration" "email_lambda_api_gateway_integration" {
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   resource_id = "${aws_api_gateway_method.email_gateway_method.resource_id}"
-#   http_method = "${aws_api_gateway_method.email_gateway_method.http_method}"
-
-#   integration_http_method = "POST"
-#   type                    = "AWS"
-#   uri                     = "${aws_lambda_function.lambda_function_email.invoke_arn}"
-
-#   request_templates = {
-#     "application/json" = ""
-#   }
-# }
-
-# resource "aws_api_gateway_method_response" "email_gateway_method_200" {
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   resource_id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
-#   http_method = "${aws_api_gateway_method.email_gateway_method.http_method}"
-#   status_code = "200"
-# }
-
-# resource "aws_api_gateway_integration_response" "email_api_gateway_integration_response" {
-#   depends_on = [
-#     "aws_api_gateway_integration.email_lambda_api_gateway_integration",
-#   ]
-
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   resource_id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
-#   http_method = "${aws_api_gateway_method.email_gateway_method.http_method}"
-#   status_code = "${aws_api_gateway_method_response.email_gateway_method_200.status_code}"
-
-#   response_templates {
-#     "application/json" = ""
-#   }
-# }
-
-# resource "aws_api_gateway_deployment" "domain_api_gateway_deployment" {
-#   depends_on = [
-#     "aws_api_gateway_method.email_gateway_method",
-#     "aws_api_gateway_integration.email_lambda_api_gateway_integration",
-#     "aws_api_gateway_method_response.email_gateway_method_200",
-#     "aws_api_gateway_integration_response.email_api_gateway_integration_response",
-#   ]
-
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   stage_name  = "prod"
-# }
-
-# data "aws_caller_identity" "current" {}
-
-# resource "aws_lambda_permission" "email_lambda_api_gateway_permission" {
-#   statement_id  = "AllowAPIGatewayInvoke"
-#   action        = "lambda:InvokeFunction"
-#   function_name = "${aws_lambda_function.lambda_function_email.arn}"
-#   principal     = "apigateway.amazonaws.com"
-
-#   source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_deployment.domain_api_gateway_deployment.rest_api_id}/*/POST/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
-# }
-
-# data "aws_route53_zone" "static_website_rout53_zone" {
-#   name = "${var.domain}."
-# }
-
-data "aws_acm_certificate" "domain_certificate" {
-  domain   = "*.${var.domain}"
-  statuses = ["ISSUED"]
+# api to send emails
+resource "aws_api_gateway_rest_api" "domain_api_gateway" {
+  name        = "${var.name}-api-gateway"
+  description = "Api gateway for ${var.api-domain}"
 }
 
-# resource "aws_api_gateway_domain_name" "api_gateway_domain_name" {
-#   domain_name              = "api.${var.domain}"
-#   regional_certificate_arn = "${data.aws_acm_certificate.domain_certificate.arn}"
+module "domain-api-gateway" {
+  source = "./modules/domain_api_gateway"
 
+  domain                            = "${var.domain}"
+  api-domain                        = "${var.api-domain}"
+  certificate-domain                = "${var.certificate-domain}"
+  api-gateway-rest-api-id           = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-deployment-stage-name = "${var.api-gateway-stage-name}"
+}
 
-#   endpoint_configuration {
-#     types = ["REGIONAL"]
-#   }
-# }
+module "post-email-resource" {
+  source = "./modules/api_gateway_resource"
 
-
-# resource "aws_route53_record" "api_gateway_route53_record" {
-#   zone_id = "${data.aws_route53_zone.static_website_rout53_zone.zone_id}"
-#   name    = "api"
-#   type    = "A"
-
-
-#   alias {
-#     name                   = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_domain_name}"
-#     zone_id                = "${aws_api_gateway_domain_name.api_gateway_domain_name.regional_zone_id}"
-#     evaluate_target_health = true
-#   }
-# }
-
-
-# resource "aws_api_gateway_base_path_mapping" "api_gateway_base_path_mapping" {
-#   api_id      = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   stage_name  = "${aws_api_gateway_deployment.domain_api_gateway_deployment.stage_name}"
-#   domain_name = "${aws_api_gateway_domain_name.api_gateway_domain_name.domain_name}"
-# }
-
+  path                              = "/email"
+  path-part                         = "email"
+  http_method                       = "POST"
+  resource-parent-id                = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  lambda-function-arn               = "${module.email_lambda.lambda-arn}"
+  api-gateway-rest-api-id           = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-deployment-stage-name = "${var.api-gateway-stage-name}"
+}
