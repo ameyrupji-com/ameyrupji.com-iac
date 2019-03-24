@@ -3,5 +3,5 @@ output "lambda-arn" {
 }
 
 output "lambda-invoke-arn" {
-  value = "${aws_lambda_function.lambda_function.invoke-arn}"
+  value = "${aws_lambda_function.lambda_function.invoke_arn}"
 }
