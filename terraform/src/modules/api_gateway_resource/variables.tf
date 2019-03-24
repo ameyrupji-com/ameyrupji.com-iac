@@ -1,6 +1,6 @@
 variable "path" {}
 
-variable "http_method" {}
+variable "http-method" {}
 
 variable "resource-parent-id" {}
 

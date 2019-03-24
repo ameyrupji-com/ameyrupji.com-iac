@@ -94,7 +94,7 @@ module "post-email-resource" {
 
   path                              = "/email"
   path-part                         = "email"
-  http_method                       = "POST"
+  http-method                       = "POST"
   resource-parent-id                = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
   lambda-function-arn               = "${module.email_lambda.lambda-arn}"
   api-gateway-rest-api-id           = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
