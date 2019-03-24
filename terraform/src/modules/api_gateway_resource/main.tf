@@ -64,7 +64,7 @@ data "aws_caller_identity" "current" {}
 resource "aws_lambda_permission" "lambda_api_gateway_permission" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = "${var.lambda-arn}"
+  function_name = "${var.lambda-function-arn}"
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${var.api-gateway-rest-api-id}/*/${var.http-method}${var.path}"

@@ -30,6 +30,6 @@ resource "aws_route53_record" "api_gateway_route53_record" {
 
 resource "aws_api_gateway_base_path_mapping" "api_gateway_base_path_mapping" {
   api_id      = "${var.api-gateway-rest-api-id}"
-  stage_name  = "${var.api-gateway-deployment-stage-name}"
+  stage_name  = "${var.api-gateway-stage-name}"
   domain_name = "${aws_api_gateway_domain_name.api_gateway_domain_name.domain_name}"
 }

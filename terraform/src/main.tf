@@ -82,21 +82,23 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 module "domain-api-gateway" {
   source = "./modules/domain_api_gateway"
 
-  domain                            = "${var.domain}"
-  api-domain                        = "${var.api-domain}"
-  certificate-domain                = "${var.certificate-domain}"
-  api-gateway-rest-api-id           = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-deployment-stage-name = "${var.api-gateway-stage-name}"
+  domain                  = "${var.domain}"
+  api-domain              = "${var.api-domain}"
+  certificate-domain      = "${var.certificate-domain}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
 }
 
 module "post-email-resource" {
   source = "./modules/api_gateway_resource"
 
-  path                              = "/email"
-  path-part                         = "email"
-  http-method                       = "POST"
-  resource-parent-id                = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-  lambda-function-arn               = "${module.email_lambda.lambda-arn}"
-  api-gateway-rest-api-id           = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-deployment-stage-name = "${var.api-gateway-stage-name}"
+  region                     = "${var.region}"
+  path                       = "/email"
+  path-part                  = "email"
+  http-method                = "POST"
+  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  lambda-function-arn        = "${module.email_lambda.lambda-arn}"
+  lambda-function-invoke-arn = "${module.email_lambda.lambda-invoke-arn}"
+  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-stage-name     = "${var.api-gateway-stage-name}"
 }

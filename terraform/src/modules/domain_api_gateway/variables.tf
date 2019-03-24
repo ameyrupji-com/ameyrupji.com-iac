@@ -6,4 +6,4 @@ variable "api-domain" {}
 
 variable "api-gateway-rest-api-id" {}
 
-variable "api-gateway-deployment-stage-name" {}
+variable "api-gateway-stage-name" {}
