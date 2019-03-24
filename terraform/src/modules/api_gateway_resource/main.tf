@@ -5,7 +5,7 @@ resource "aws_api_gateway_resource" "api_gateway_resource" {
 }
 
 resource "aws_api_gateway_method" "gateway_method" {
-  rest_api_id   = "${var.api-gateway-rest-api-id.id}"
+  rest_api_id   = "${var.api-gateway-rest-api-id}"
   resource_id   = "${aws_api_gateway_resource.api_gateway_resource.id}"
   http_method   = "${var.http-method}"
   authorization = "NONE"
