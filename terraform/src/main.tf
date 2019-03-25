@@ -75,7 +75,7 @@ EOF
 
 # api to send emails
 resource "aws_api_gateway_rest_api" "domain_api_gateway" {
-  name        = "${var.name}-api-gateway"
+  name        = "${var.api-gateway-name}-api-gateway"
   description = "Api gateway for ${var.api-domain}"
 }
 
@@ -84,6 +84,7 @@ module "domain-api-gateway" {
 
   domain                  = "${var.domain}"
   api-domain              = "${var.api-domain}"
+  api-subdomain           = "${var.api-subdomain}"
   certificate-domain      = "${var.certificate-domain}"
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
   api-gateway-stage-name  = "${var.api-gateway-stage-name}"

@@ -16,7 +16,7 @@ code-domain = "code.beta.ameyrupji.com"
 blog-domain = "blog.beta.ameyrupji.com"
 images-domain = "images.beta.ameyrupji.com"
 
-api-gateway-name = "beta-ameyrupji"
+api-gateway-name = "api-beta-ameyrupji"
 api-subdomain = "api.beta"
 api-domain = "api.beta.ameyrupji.com"
 api-gateway-stage-name = "beta"
