@@ -4,24 +4,28 @@ import json
 from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
-    SENDER = "Contact Form <ameyrupji@gmail.com>"
-    RECIPIENT = "ameyrupji@gmail.com"
-    # CONFIGURATION_SET = "ConfigSet"
-    AWS_REGION = "us-east-1"
-    SUBJECT = "Contact Form Submitted"
-    BODY_TEXT = (json.dumps(event['body']))
-    BODY_HTML = """<html>
-    <head></head>
-    <body>
-    <h1>Contact form submitted.</h1>
-    <p>Details:</p>
-    <p>{form_content}</p>
-    </body>
-    </html>""".format(form_content=json.dumps(event['body']))        
-    CHARSET = "UTF-8"
-
-    client = boto3.client('ses',region_name=AWS_REGION)
     try:
+        print('event: ')
+        print(event)
+
+        SENDER = "Contact Form <ameyrupji@gmail.com>"
+        RECIPIENT = "ameyrupji@gmail.com"
+        # CONFIGURATION_SET = "ConfigSet"
+        AWS_REGION = "us-east-1"
+        SUBJECT = "Contact Form Submitted"
+        BODY_TEXT = (json.dumps(event))
+        BODY_HTML = """<html>
+        <head></head>
+        <body>
+        <h1>Contact form submitted.</h1>
+        <p>Details:</p>
+        <p>{form_content}</p>
+        </body>
+        </html>""".format(form_content=json.dumps(event))        
+        CHARSET = "UTF-8"
+
+        client = boto3.client('ses',region_name=AWS_REGION)
+    
         response = client.send_email(
             Destination={
                 'ToAddresses': [
@@ -44,8 +48,7 @@ def lambda_handler(event, context):
                     'Data': SUBJECT,
                 },
             },
-            Source=SENDER,
-            # ConfigurationSetName=CONFIGURATION_SET,
+            Source=SENDER
         )
     except ClientError as e:
         print(e)
