@@ -106,15 +106,16 @@ module "post-email-resource" {
 module "option-email-resource" {
   source = "./modules/options_api_gateway_resource"
 
-  region                  = "${var.region}"
-  path                    = "/email"
   path-part               = "email"
   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment" {
-  depends_on = ["${concat(module.post-email-resource.deployment-dependencies, module.option-email-resource.deployment-dependencies)}"]
+  depends_on = [
+    "${module.post-email-resource}",
+    "${module.options-api-gateway-resource}",
+  ]
 
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
   stage_name  = "${var.api-gateway-stage-name}"

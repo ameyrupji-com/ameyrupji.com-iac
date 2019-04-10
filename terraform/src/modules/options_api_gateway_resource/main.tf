@@ -15,14 +15,7 @@ resource "aws_api_gateway_integration" "lambda_api_gateway_integration" {
   rest_api_id = "${var.api-gateway-rest-api-id}"
   resource_id = "${aws_api_gateway_method.gateway_method.resource_id}"
   http_method = "${aws_api_gateway_method.gateway_method.http_method}"
-
-  integration_http_method = "${var.http-method}"
-  type                    = "AWS"
-  uri                     = "${var.lambda-function-invoke-arn}"
-
-  request_templates = {
-    "application/json" = "Empty"
-  }
+  type        = "MOCK"
 
   depends_on = ["aws_api_gateway_method.gateway_method"]
 }
@@ -31,8 +24,19 @@ resource "aws_api_gateway_method_response" "gateway_method_200" {
   rest_api_id = "${var.api-gateway-rest-api-id}"
   resource_id = "${aws_api_gateway_resource.api_gateway_resource.id}"
   http_method = "${aws_api_gateway_method.gateway_method.http_method}"
-  type        = "MOCK"
-  depends_on  = ["aws_api_gateway_method.gateway_method"]
+  status_code = 200
+
+  response_models {
+    "application/json" = "Empty"
+  }
+
+  response_parameters {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+
+  depends_on = ["aws_api_gateway_method.gateway_method"]
 }
 
 resource "aws_api_gateway_integration_response" "api_gateway_integration_response" {
