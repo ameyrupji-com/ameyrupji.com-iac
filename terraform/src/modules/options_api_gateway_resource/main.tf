@@ -11,7 +11,7 @@ resource "aws_api_gateway_method" "gateway_method" {
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "lambda_api_gateway_integration" {
+resource "aws_api_gateway_integration" "mock_api_gateway_integration" {
   rest_api_id = "${var.api-gateway-rest-api-id}"
   resource_id = "${aws_api_gateway_method.gateway_method.resource_id}"
   http_method = "${aws_api_gateway_method.gateway_method.http_method}"
