@@ -114,7 +114,7 @@ module "option-email-resource" {
 }
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment" {
-  depends_on = "${concat(post-email-resource.deployment-dependencies, post-email-resource.deployment-dependencies)}"
+  depends_on = ["${concat(module.post-email-resource.deployment-dependencies, module.option-email-resource.deployment-dependencies)}"]
 
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
   stage_name  = "${var.api-gateway-stage-name}"
