@@ -1,4 +1,4 @@
-output "deployment-dependencies" {
+output "deployment_dependencies" {
   value = [
     "aws_api_gateway_method.gateway_method",
     "aws_api_gateway_integration.lambda_api_gateway_integration",

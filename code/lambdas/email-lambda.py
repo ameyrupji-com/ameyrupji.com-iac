@@ -53,11 +53,17 @@ def lambda_handler(event, context):
     except ClientError as e:
         print(e)
         return {
-            "statusCode": 500,
-            "body": "Error occurred in sending email!"
+            'statusCode': 500,
+            'body': 'Error occurred in sending email!',
+            'headers' : {
+                'Access-Control-Allow-Origin' : '*'
+            }
         }
     else:
         return {
-            "statusCode": 200,
-            "body": "Email successfully sent!"
+            'statusCode': 200,
+            'body': 'Email successfully sent!',
+            'headers' : {
+                'Access-Control-Allow-Origin' : '*'
+            }
         }

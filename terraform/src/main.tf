@@ -101,5 +101,21 @@ module "post-email-resource" {
   lambda-function-arn        = "${module.email_lambda.lambda-arn}"
   lambda-function-invoke-arn = "${module.email_lambda.lambda-invoke-arn}"
   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-stage-name     = "${var.api-gateway-stage-name}"
+}
+
+module "option-email-resource" {
+  source = "./modules/options_api_gateway_resource"
+
+  region                  = "${var.region}"
+  path                    = "/email"
+  path-part               = "email"
+  resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+}
+
+resource "aws_api_gateway_deployment" "api_gateway_deployment" {
+  depends_on = "${concat(post-email-resource.deployment-dependencies, post-email-resource.deployment-dependencies)}"
+
+  rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  stage_name  = "${var.api-gateway-stage-name}"
 }
