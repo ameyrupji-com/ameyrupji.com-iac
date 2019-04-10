@@ -79,8 +79,10 @@ EOF
 #   description = "Api gateway for ${var.api-domain}"
 # }
 
+
 # module "domain-api-gateway" {
 #   source = "./modules/domain_api_gateway"
+
 
 #   domain                  = "${var.domain}"
 #   api-domain              = "${var.api-domain}"
@@ -90,8 +92,10 @@ EOF
 #   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
 # }
 
+
 # module "post-email-resource" {
 #   source = "./modules/api_gateway_resource"
+
 
 #   region                     = "${var.region}"
 #   path                       = "/email"
@@ -103,15 +107,19 @@ EOF
 #   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
+
 # module "option-email-resource" {
 #   source = "./modules/options_api_gateway_resource"
+
 
 #   path-part               = "email"
 #   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
 #   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
+
 # resource "aws_api_gateway_deployment" "api_gateway_deployment" {
 #   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 #   stage_name  = "${var.api-gateway-stage-name}"
 # }
+
