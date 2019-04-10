@@ -47,14 +47,14 @@ module "s3_images_domain" {
 module "email_lambda" {
   source = "./modules/api_lambda_with_logging"
 
-  lambda-name      = "${var.email-lambda-name}"
-  lambda-file-name = "${var.email-lambda-file-name}"
+  lambda-name      = "${var.post-email-lambda-name}"
+  lambda-file-name = "${var.post-email-lambda-file-name}"
 
   lambda-version     = "${var.lambda-version}"
   assets-bucket-name = "${var.assets-bucket-name}"
 
   custom-policy = {
-    name        = "${var.email-lambda-name}-ses-send-email-access"
+    name        = "${var.post-email-lambda-name}-ses-send-email-access"
     description = "SES email policy"
 
     document = <<EOF

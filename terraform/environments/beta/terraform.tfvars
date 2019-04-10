@@ -23,5 +23,5 @@ api-gateway-stage-name = "beta"
 
 certificate-domain = "*.beta.ameyrupji.com"
 
-email-lambda-name = "beta-post-email"
-email-lambda-file-name = "email-lambda"
+post-email-lambda-name = "beta-post-email"
+post-email-lambda-file-name = "post-email-lambda"

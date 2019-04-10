@@ -23,5 +23,5 @@ api-gateway-stage-name = "prod"
 
 certificate-domain = "*.ameyrupji.com"
 
-email-lambda-name = "post-email"
-email-lambda-file-name = "email-lambda"
+post-email-lambda-name = "post-email"
+post-email-lambda-file-name = "post-email-lambda"

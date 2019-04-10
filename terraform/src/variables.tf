@@ -36,8 +36,8 @@ variable "api-gateway-stage-name" {}
 
 variable "certificate-domain" {}
 
-variable "email-lambda-name" {}
+variable "post-email-lambda-name" {}
 
-variable "email-lambda-file-name" {}
+variable "post-email-lambda-file-name" {}
 
 variable "assets-bucket-name" {}
