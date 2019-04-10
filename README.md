@@ -1,6 +1,6 @@
 # ameyrupji.com-iac
 
-[![CircleCI](https://circleci.com/gh/ameyrupji/ameyrupji.com-iac.svg?style=svg)](https://circleci.com/gh/ameyrupji/ameyrupji.com-iac)
+[![CircleCI](https://circleci.com/gh/ameyrupji-com/ameyrupji.com-iac.svg?style=svg)](https://circleci.com/gh/ameyrupji-com/ameyrupji.com-iac)
 
 Infrastructure As Code (iac) for hosting ameyrupji.com in AWS using Terraform. This repository createds the necessary AWS infastructure enables quick deployment and easy testability in beta environment before the code can be promoted to the live website. The builds are triggered through CircleCI integration of this repository.
 
