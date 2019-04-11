@@ -1,3 +1,8 @@
+resource "aws_api_gateway_deployment" "api_gateway_deployment" {
+  rest_api_id = "${var.api-gateway-rest-api-id}"
+  stage_name  = "${var.api-gateway-stage-name}"
+}
+
 data "aws_route53_zone" "domain_rout53_zone" {
   name = "${var.domain}."
 }

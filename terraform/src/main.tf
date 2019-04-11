@@ -88,17 +88,6 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
   description = "Api gateway for ${var.api-domain}"
 }
 
-module "domain_api_gateway" {
-  source = "./modules/domain_api_gateway"
-
-  domain                  = "${var.domain}"
-  api-domain              = "${var.api-domain}"
-  api-subdomain           = "${var.api-subdomain}"
-  certificate-domain      = "${var.certificate-domain}"
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
-}
-
 module "get_root_resource" {
   source = "./modules/api_gateway_resource"
 
@@ -141,16 +130,13 @@ module "option_email_resource" {
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
-# resource "aws_api_gateway_deployment" "api_gateway_deployment" {
-#   depends_on = [
-#     "module.get_root_resource",
-#     "module.option_root_resource",
-#     "module.post_email_resource",
-#     "module.option_email_resource",
-#   ]
+module "domain_api_gateway" {
+  source = "./modules/domain_api_gateway"
 
-
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   stage_name  = "${var.api-gateway-stage-name}"
-# }
-
+  domain                  = "${var.domain}"
+  api-domain              = "${var.api-domain}"
+  api-subdomain           = "${var.api-subdomain}"
+  certificate-domain      = "${var.certificate-domain}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+}
