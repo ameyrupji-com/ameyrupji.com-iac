@@ -142,6 +142,12 @@ module "option-email-resource" {
 }
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment" {
+  depends_on = [
+    "module.get-root-resource.aws_api_gateway_resource_id",
+    "module.option-root-resource.aws_api_gateway_resource_id",
+    "module.post-email-resource.aws_api_gateway_resource_id",
+    "module.option-email-resource.aws_api_gateway_resource_id",
+  ]
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
   stage_name  = "${var.api-gateway-stage-name}"
 }
