@@ -44,7 +44,7 @@ module "s3_images_domain" {
   bucket_name = "${var.images-domain}"
 }
 
-module "email_lambda" {
+module "post_email_lambda" {
   source = "./modules/api_lambda_with_logging"
 
   lambda-name      = "${var.post-email-lambda-name}"
@@ -71,6 +71,16 @@ module "email_lambda" {
 }
 EOF
   }
+}
+
+module "get_root_lambda" {
+  source = "./modules/api_lambda_with_logging"
+
+  lambda-name      = "${var.get-root-lambda-name}"
+  lambda-file-name = "${var.get-root-lambda-file-name}"
+
+  lambda-version     = "${var.lambda-version}"
+  assets-bucket-name = "${var.assets-bucket-name}"
 }
 
 # api to send emails

@@ -8,4 +8,10 @@ variable "assets-bucket-name" {}
 
 variable "custom-policy" {
   type = "map"
+
+  default = {
+    name        = ""
+    description = ""
+    document    = ""
+  }
 }
