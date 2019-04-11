@@ -26,5 +26,5 @@ certificate-domain = "*.beta.ameyrupji.com"
 post-email-lambda-name = "beta-post-email"
 post-email-lambda-file-name = "post-email-lambda"
 
-get-root-lambda-name = "get-root"
+get-root-lambda-name = "beta-get-root"
 get-root-lambda-file-name = "get-root-lambda"
