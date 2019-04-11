@@ -83,12 +83,12 @@ module "get_root_lambda" {
   assets-bucket-name = "${var.assets-bucket-name}"
 }
 
-api to send emails resource "aws_api_gateway_rest_api" "domain_api_gateway" {
+resource "aws_api_gateway_rest_api" "domain_api_gateway" {
   name        = "${var.api-gateway-name}-api-gateway"
   description = "Api gateway for ${var.api-domain}"
 }
 
-module "domain-api-gateway" {
+module "domain_api_gateway" {
   source = "./modules/domain_api_gateway"
 
   domain                  = "${var.domain}"
