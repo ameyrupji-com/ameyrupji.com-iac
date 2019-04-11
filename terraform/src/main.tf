@@ -112,7 +112,7 @@ module "get-root-resource" {
   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
-module "option-email-resource" {
+module "option-root-resource" {
   source = "./modules/options_api_gateway_resource"
 
   path-part               = "email"
