@@ -41,3 +41,7 @@ variable "post-email-lambda-name" {}
 variable "post-email-lambda-file-name" {}
 
 variable "assets-bucket-name" {}
+
+variable "get-root-lambda-name" {}
+
+variable "get-root-lambda-file-name" {}
