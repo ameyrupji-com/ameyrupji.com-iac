@@ -83,53 +83,65 @@ module "get_root_lambda" {
   assets-bucket-name = "${var.assets-bucket-name}"
 }
 
-# api to send emails
-# resource "aws_api_gateway_rest_api" "domain_api_gateway" {
-#   name        = "${var.api-gateway-name}-api-gateway"
-#   description = "Api gateway for ${var.api-domain}"
-# }
+api to send emails resource "aws_api_gateway_rest_api" "domain_api_gateway" {
+  name        = "${var.api-gateway-name}-api-gateway"
+  description = "Api gateway for ${var.api-domain}"
+}
 
+module "domain-api-gateway" {
+  source = "./modules/domain_api_gateway"
 
-# module "domain-api-gateway" {
-#   source = "./modules/domain_api_gateway"
+  domain                  = "${var.domain}"
+  api-domain              = "${var.api-domain}"
+  api-subdomain           = "${var.api-subdomain}"
+  certificate-domain      = "${var.certificate-domain}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+}
 
+module "get-root-resource" {
+  source = "./modules/api_gateway_resource"
 
-#   domain                  = "${var.domain}"
-#   api-domain              = "${var.api-domain}"
-#   api-subdomain           = "${var.api-subdomain}"
-#   certificate-domain      = "${var.certificate-domain}"
-#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
-# }
+  region                     = "${var.region}"
+  path                       = "/{proxy+}"
+  path-part                  = "{proxy+}"
+  http-method                = "GET"
+  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
+  lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
+  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+}
 
+module "option-email-resource" {
+  source = "./modules/options_api_gateway_resource"
 
-# module "post-email-resource" {
-#   source = "./modules/api_gateway_resource"
+  path-part               = "email"
+  resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+}
 
+module "post-email-resource" {
+  source = "./modules/api_gateway_resource"
 
-#   region                     = "${var.region}"
-#   path                       = "/email"
-#   path-part                  = "email"
-#   http-method                = "POST"
-#   resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-#   lambda-function-arn        = "${module.email_lambda.lambda-arn}"
-#   lambda-function-invoke-arn = "${module.email_lambda.lambda-invoke-arn}"
-#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-# }
+  region                     = "${var.region}"
+  path                       = "/email"
+  path-part                  = "email"
+  http-method                = "POST"
+  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  lambda-function-arn        = "${module.email_lambda.lambda-arn}"
+  lambda-function-invoke-arn = "${module.email_lambda.lambda-invoke-arn}"
+  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+}
 
+module "option-email-resource" {
+  source = "./modules/options_api_gateway_resource"
 
-# module "option-email-resource" {
-#   source = "./modules/options_api_gateway_resource"
+  path-part               = "email"
+  resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+}
 
-
-#   path-part               = "email"
-#   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-# }
-
-
-# resource "aws_api_gateway_deployment" "api_gateway_deployment" {
-#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   stage_name  = "${var.api-gateway-stage-name}"
-# }
-
+resource "aws_api_gateway_deployment" "api_gateway_deployment" {
+  rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  stage_name  = "${var.api-gateway-stage-name}"
+}
