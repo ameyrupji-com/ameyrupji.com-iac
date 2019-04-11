@@ -67,7 +67,7 @@ resource "aws_iam_role_policy_attachment" "lambda_iam_role_policy_attachment_log
 }
 
 resource "aws_iam_policy" "custom_iam_policy" {
-  count = "${(var.custom-policy["name"] == "" * var.custom-policy["document"] == "") ? 0 : 1}"
+  count = "${((var.custom-policy["name"] == "" ? 0 : 1) * (var.custom-policy["document"] == "" ? 0 : 1))}"
 
   name        = "${var.custom-policy["name"]}"
   path        = "/"
@@ -76,7 +76,7 @@ resource "aws_iam_policy" "custom_iam_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "custom_iam_role_policy_attachment" {
-  count = "${(var.custom-policy["name"] == "" * var.custom-policy["document"] == "") ? 0 : 1}"
+  count = "${((var.custom-policy["name"] == "" ? 0 : 1) * (var.custom-policy["document"] == "" ? 0 : 1))}"
 
   role       = "${aws_iam_role.lambda_exec_iam_role.name}"
   policy_arn = "${aws_iam_policy.custom_iam_policy.arn}"
