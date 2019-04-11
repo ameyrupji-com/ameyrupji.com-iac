@@ -141,14 +141,14 @@ module "option_email_resource" {
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
-resource "aws_api_gateway_deployment" "api_gateway_deployment" {
-  depends_on = [
-    "module.get_root_resource",
-    "module.option_root_resource",
-    "module.post_email_resource",
-    "module.option_email_resource",
-  ]
+# resource "aws_api_gateway_deployment" "api_gateway_deployment" {
+#   depends_on = [
+#     "module.get_root_resource",
+#     "module.option_root_resource",
+#     "module.post_email_resource",
+#     "module.option_email_resource",
+#   ]
 
-  rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  stage_name  = "${var.api-gateway-stage-name}"
-}
+#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   stage_name  = "${var.api-gateway-stage-name}"
+# }
