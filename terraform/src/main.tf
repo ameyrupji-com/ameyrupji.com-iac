@@ -99,7 +99,7 @@ module "domain_api_gateway" {
   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
 }
 
-module "get-root-resource" {
+module "get_root_resource" {
   source = "./modules/api_gateway_resource"
 
   region                     = "${var.region}"
@@ -112,7 +112,7 @@ module "get-root-resource" {
   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
-module "option-root-resource" {
+module "option_root_resource" {
   source = "./modules/options_api_gateway_resource"
 
   path-part               = "email"
@@ -120,7 +120,7 @@ module "option-root-resource" {
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
-module "post-email-resource" {
+module "post_email_resource" {
   source = "./modules/api_gateway_resource"
 
   region                     = "${var.region}"
@@ -133,7 +133,7 @@ module "post-email-resource" {
   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
 
-module "option-email-resource" {
+module "option_email_resource" {
   source = "./modules/options_api_gateway_resource"
 
   path-part               = "email"
@@ -143,10 +143,10 @@ module "option-email-resource" {
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment" {
   depends_on = [
-    "module.get-root-resource.aws_api_gateway_resource_id",
-    "module.option-root-resource.aws_api_gateway_resource_id",
-    "module.post-email-resource.aws_api_gateway_resource_id",
-    "module.option-email-resource.aws_api_gateway_resource_id",
+    "module.get_root_resource.api-gateway-resource-id",
+    "module.option_root_resource.api-gateway-resource-id",
+    "module.post_email_resource.api-gateway-resource-id",
+    "module.option_email_resource.api-gateway-resource-id",
   ]
 
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
