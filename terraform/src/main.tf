@@ -91,7 +91,6 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 # module "get_root_resource" {
 #   source = "./modules/api_gateway_resource"
 
-
 #   region                     = "${var.region}"
 #   path                       = "/{proxy+}"
 #   path-part                  = "{proxy+}"
@@ -102,20 +101,16 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 #   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
-
 # module "option_root_resource" {
 #   source = "./modules/options_api_gateway_resource"
-
 
 #   path-part               = "{proxy+}"
 #   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
 #   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
-
 # module "post_email_resource" {
 #   source = "./modules/api_gateway_resource"
-
 
 #   region                     = "${var.region}"
 #   path                       = "/email"
@@ -127,20 +122,27 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 #   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
-
 # module "option_email_resource" {
 #   source = "./modules/options_api_gateway_resource"
-
 
 #   path-part               = "email"
 #   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
 #   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
+# module "deploy_domain_api_gateway" {
+#   source = "./modules/deploy_domain_api_gateway"
 
-# module "domain_api_gateway" {
-#   source = "./modules/domain_api_gateway"
-
+#   fake_dependancies = [
+#     "module.get_root_resource.api-gateway-resource-id",
+#     "module.get_root_resource.aws-api-gateway-resource-path",
+#     "module.option_root_resource.api-gateway-resource-id",
+#     "module.option_root_resource.aws-api-gateway-resource-path",
+#     "module.post_email_resource.api-gateway-resource-id",
+#     "module.post_email_resource.aws-api-gateway-resource-path",
+#     "module.option_email_resource.api-gateway-resource-id",
+#     "module.option_email_resource.aws-api-gateway-resource-path",
+#   ]
 
 #   domain                  = "${var.domain}"
 #   api-domain              = "${var.api-domain}"
@@ -149,4 +151,3 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 #   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 #   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
 # }
-
