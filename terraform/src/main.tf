@@ -104,7 +104,7 @@ module "get_root_resource" {
 module "option_root_resource" {
   source = "./modules/options_api_gateway_resource"
 
-  path-part               = "email"
+  path-part               = "{proxy+}"
   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 }
