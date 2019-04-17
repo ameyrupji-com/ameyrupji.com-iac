@@ -1,9 +1,3 @@
-resource "aws_api_gateway_resource" "api_gateway_resource" {
-  rest_api_id = "${var.api-gateway-rest-api-id}"
-  parent_id   = "${var.resource-parent-id}"
-  path_part   = "${var.path-part}"
-}
-
 resource "aws_api_gateway_method" "gateway_method" {
   rest_api_id   = "${var.api-gateway-rest-api-id}"
   resource_id   = "${aws_api_gateway_resource.api_gateway_resource.id}"
