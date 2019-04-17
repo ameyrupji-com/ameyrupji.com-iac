@@ -11,5 +11,5 @@ variable "api-gateway-rest-api-id" {}
 variable "api-gateway-stage-name" {}
 
 variable "fake-dependancies" {
-  type = "list(string)"
+  type = "list"
 }
