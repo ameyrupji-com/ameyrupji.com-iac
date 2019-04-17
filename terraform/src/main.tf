@@ -87,71 +87,71 @@ module "get_root_lambda" {
 # This is going to be enabled in v0.12 which is in beta at the point of this 
 # development moving to use approach without modules
 
-resource "aws_api_gateway_rest_api" "domain_api_gateway" {
-  name        = "${var.api-gateway-name}-api-gateway"
-  description = "Api gateway for ${var.api-domain}"
-}
+# resource "aws_api_gateway_rest_api" "domain_api_gateway" {
+#   name        = "${var.api-gateway-name}-api-gateway"
+#   description = "Api gateway for ${var.api-domain}"
+# }
 
-module "get_root_resource" {
-  source = "./modules/api_gateway_resource"
+# module "get_root_resource" {
+#   source = "./modules/api_gateway_resource"
 
-  region                     = "${var.region}"
-  path                       = "/{proxy+}"
-  path-part                  = "{proxy+}"
-  http-method                = "GET"
-  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-  lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
-  lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
-  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-}
+#   region                     = "${var.region}"
+#   path                       = "/{proxy+}"
+#   path-part                  = "{proxy+}"
+#   http-method                = "GET"
+#   resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+#   lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
+#   lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
+#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+# }
 
-module "option_root_resource" {
-  source = "./modules/options_api_gateway_resource"
+# module "option_root_resource" {
+#   source = "./modules/options_api_gateway_resource"
 
-  path-part               = "{proxy+}"
-  resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-}
+#   path-part               = "{proxy+}"
+#   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+# }
 
-module "post_email_resource" {
-  source = "./modules/api_gateway_resource"
+# module "post_email_resource" {
+#   source = "./modules/api_gateway_resource"
 
-  region                     = "${var.region}"
-  path                       = "/email"
-  path-part                  = "email"
-  http-method                = "POST"
-  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-  lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
-  lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
-  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-}
+#   region                     = "${var.region}"
+#   path                       = "/email"
+#   path-part                  = "email"
+#   http-method                = "POST"
+#   resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+#   lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
+#   lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
+#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+# }
 
-module "option_email_resource" {
-  source = "./modules/options_api_gateway_resource"
+# module "option_email_resource" {
+#   source = "./modules/options_api_gateway_resource"
 
-  path-part               = "email"
-  resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-}
+#   path-part               = "email"
+#   resource-parent-id      = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+# }
 
-module "deploy_domain_api_gateway" {
-  source = "./modules/deploy_domain_api_gateway"
+# module "deploy_domain_api_gateway" {
+#   source = "./modules/deploy_domain_api_gateway"
 
-  fake-dependancies = [
-    "module.get_root_resource.api-gateway-resource-id",
-    "module.get_root_resource.aws-api-gateway-resource-path",
-    "module.option_root_resource.api-gateway-resource-id",
-    "module.option_root_resource.aws-api-gateway-resource-path",
-    "module.post_email_resource.api-gateway-resource-id",
-    "module.post_email_resource.aws-api-gateway-resource-path",
-    "module.option_email_resource.api-gateway-resource-id",
-    "module.option_email_resource.aws-api-gateway-resource-path",
-  ]
+#   fake-dependancies = [
+#     "module.get_root_resource.api-gateway-resource-id",
+#     "module.get_root_resource.aws-api-gateway-resource-path",
+#     "module.option_root_resource.api-gateway-resource-id",
+#     "module.option_root_resource.aws-api-gateway-resource-path",
+#     "module.post_email_resource.api-gateway-resource-id",
+#     "module.post_email_resource.aws-api-gateway-resource-path",
+#     "module.option_email_resource.api-gateway-resource-id",
+#     "module.option_email_resource.aws-api-gateway-resource-path",
+#   ]
 
-  domain                  = "${var.domain}"
-  api-domain              = "${var.api-domain}"
-  api-subdomain           = "${var.api-subdomain}"
-  certificate-domain      = "${var.certificate-domain}"
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
-}
+#   domain                  = "${var.domain}"
+#   api-domain              = "${var.api-domain}"
+#   api-subdomain           = "${var.api-subdomain}"
+#   certificate-domain      = "${var.certificate-domain}"
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+# }
