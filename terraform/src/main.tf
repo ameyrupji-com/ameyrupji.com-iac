@@ -83,6 +83,10 @@ module "get_root_lambda" {
   assets-bucket-name = "${var.assets-bucket-name}"
 }
 
+# This is not working as terraform does not support inter midular dependancies 
+# This is going to be enabled in v0.12 which is in beta at the point of this 
+# development moving to use approach without modules
+
 resource "aws_api_gateway_rest_api" "domain_api_gateway" {
   name        = "${var.api-gateway-name}-api-gateway"
   description = "Api gateway for ${var.api-domain}"
@@ -133,7 +137,7 @@ module "option_email_resource" {
 module "deploy_domain_api_gateway" {
   source = "./modules/deploy_domain_api_gateway"
 
-  fake_dependancies = [
+  fake-dependancies = [
     "module.get_root_resource.api-gateway-resource-id",
     "module.get_root_resource.aws-api-gateway-resource-path",
     "module.option_root_resource.api-gateway-resource-id",
