@@ -99,11 +99,12 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 #   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
 # }
 
-# module "option_root_method" {
-#   source = "./modules/options_api_gateway_method"
+module "option_root_method" {
+  source = "./modules/options_api_gateway_method"
 
-#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-# }
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-resource-id = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+}
 
 resource "aws_api_gateway_resource" "email_api_gateway_resource" {
   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
