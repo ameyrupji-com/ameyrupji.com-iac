@@ -118,7 +118,7 @@ module "post_email_method" {
 
   region                     = "${var.region}"
   http-method                = "POST"
-  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  path                       = "/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
   lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
   lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
