@@ -132,18 +132,21 @@ module "option_email_method" {
   api-gateway-resource-id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
 }
 
-module "deploy_domain_api_gateway" {
-  source = "./modules/deploy_domain_api_gateway"
+# module "deploy_domain_api_gateway" {
+#   source = "./modules/deploy_domain_api_gateway"
 
-  # This is not working as terraform does not support inter midular dependancies 
-  # This is going to be enabled in v0.12 which is in beta at the point of this 
-  # development moving to use approach without modules
-  fake-dependancies = []
 
-  domain                  = "${var.domain}"
-  api-domain              = "${var.api-domain}"
-  api-subdomain           = "${var.api-subdomain}"
-  certificate-domain      = "${var.certificate-domain}"
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
-}
+#   # This is not working as terraform does not support inter midular dependancies 
+#   # This is going to be enabled in v0.12 which is in beta at the point of this 
+#   # development moving to use approach without modules
+#   fake-dependancies = []
+
+
+#   domain                  = "${var.domain}"
+#   api-domain              = "${var.api-domain}"
+#   api-subdomain           = "${var.api-subdomain}"
+#   certificate-domain      = "${var.certificate-domain}"
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+# }
+
