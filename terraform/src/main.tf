@@ -113,16 +113,17 @@ resource "aws_api_gateway_resource" "email_api_gateway_resource" {
   path_part   = "email"
 }
 
-# module "post_email_method" {
-#   source = "./modules/api_gateway_method"
+module "post_email_method" {
+  source = "./modules/api_gateway_method"
 
-#   region                     = "${var.region}"
-#   http-method                = "POST"
-#   resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-#   lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
-#   lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
-#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-# }
+  region                     = "${var.region}"
+  http-method                = "POST"
+  resource-parent-id         = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
+  lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
+  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-resource-id    = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
+}
 
 module "option_email_method" {
   source = "./modules/options_api_gateway_method"
