@@ -88,16 +88,17 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
   description = "Api gateway for ${var.api-domain}"
 }
 
-# module "get_root_method" {
-#   source = "./modules/api_gateway_method"
+module "get_root_method" {
+  source = "./modules/api_gateway_method"
 
-#   region                     = "${var.region}"
-#   path                       = "/{proxy+}"
-#   http-method                = "GET"
-#   lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
-#   lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
-#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-# }
+  region                     = "${var.region}"
+  path                       = "/"
+  http-method                = "GET"
+  lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
+  lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
+  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-resource-id    = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+}
 
 module "option_root_method" {
   source = "./modules/options_api_gateway_method"
