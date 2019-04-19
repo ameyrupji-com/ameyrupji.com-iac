@@ -83,67 +83,80 @@ module "get_root_lambda" {
   assets-bucket-name = "${var.assets-bucket-name}"
 }
 
-resource "aws_api_gateway_rest_api" "domain_api_gateway" {
-  name        = "${var.api-gateway-name}-api-gateway"
-  description = "Api gateway for ${var.api-domain}"
-}
+# resource "aws_api_gateway_rest_api" "domain_api_gateway" {
+#   name        = "${var.api-gateway-name}-api-gateway"
+#   description = "Api gateway for ${var.api-domain}"
+# }
 
-module "get_root_method" {
-  source = "./modules/api_gateway_method"
 
-  region                     = "${var.region}"
-  path                       = "/"
-  http-method                = "GET"
-  lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
-  lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
-  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id    = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-}
+# module "get_root_method" {
+#   source = "./modules/api_gateway_method"
 
-module "option_root_method" {
-  source = "./modules/options_api_gateway_method"
 
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-}
+#   region                     = "${var.region}"
+#   path                       = "/"
+#   http-method                = "GET"
+#   lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
+#   lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
+#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-resource-id    = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+# }
 
-resource "aws_api_gateway_resource" "email_api_gateway_resource" {
-  rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  parent_id   = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
-  path_part   = "email"
-}
 
-module "post_email_method" {
-  source = "./modules/api_gateway_method"
+# module "option_root_method" {
+#   source = "./modules/options_api_gateway_method"
 
-  region                     = "${var.region}"
-  http-method                = "POST"
-  path                       = "/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
-  lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
-  lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
-  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id    = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
-}
 
-module "option_email_method" {
-  source = "./modules/options_api_gateway_method"
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-resource-id = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+# }
 
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
-}
 
-module "deploy_domain_api_gateway" {
-  source = "./modules/deploy_domain_api_gateway"
+# resource "aws_api_gateway_resource" "email_api_gateway_resource" {
+#   rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   parent_id   = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+#   path_part   = "email"
+# }
 
-  # This is not working as terraform does not support inter midular dependancies 
-  # This is going to be enabled in v0.12 which is in beta at the point of this 
-  # development moving to use approach without modules
-  fake-dependancies = []
 
-  domain                  = "${var.domain}"
-  api-domain              = "${var.api-domain}"
-  api-subdomain           = "${var.api-subdomain}"
-  certificate-domain      = "${var.certificate-domain}"
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
-}
+# module "post_email_method" {
+#   source = "./modules/api_gateway_method"
+
+
+#   region                     = "${var.region}"
+#   http-method                = "POST"
+#   path                       = "/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
+#   lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
+#   lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
+#   api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-resource-id    = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
+# }
+
+
+# module "option_email_method" {
+#   source = "./modules/options_api_gateway_method"
+
+
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-resource-id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
+# }
+
+
+# module "deploy_domain_api_gateway" {
+#   source = "./modules/deploy_domain_api_gateway"
+
+
+#   # This is not working as terraform does not support inter midular dependancies 
+#   # This is going to be enabled in v0.12 which is in beta at the point of this 
+#   # development moving to use approach without modules
+#   fake-dependancies = []
+
+
+#   domain                  = "${var.domain}"
+#   api-domain              = "${var.api-domain}"
+#   api-subdomain           = "${var.api-subdomain}"
+#   certificate-domain      = "${var.certificate-domain}"
+#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+#   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+# }
+
