@@ -150,3 +150,6 @@ module "option_email_method" {
 #   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
 # }
 
+
+# TODO: enable logging for each method created
+

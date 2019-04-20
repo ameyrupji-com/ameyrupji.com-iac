@@ -1,3 +1,13 @@
+resource "aws_iam_role" "domain_api_gateway_coudwatch_log_role" {
+  name = "${var.domain}-cloudwatch-log-role"
+}
+
+resource "aws_iam_policy_attachment" "domain_api_gateway_coudwatch_role_policy_attachment" {
+  name       = "${var.domain}-cloudwatch-log-role-policy-attachment"
+  roles      = ["${aws_iam_role.domain_api_gateway_coudwatch_log_role.name}"]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+}
+
 resource "aws_api_gateway_deployment" "api_gateway_deployment" {
   rest_api_id = "${var.api-gateway-rest-api-id}"
   stage_name  = "${var.api-gateway-stage-name}"
