@@ -8,12 +8,14 @@ def lambda_handler(event, context):
         print('event: ')
         print(event)
 
+        post_data = event["body"]
+
         SENDER = "Contact Form <ameyrupji@gmail.com>"
         RECIPIENT = "ameyrupji@gmail.com"
         # CONFIGURATION_SET = "ConfigSet"
         AWS_REGION = "us-east-1"
         SUBJECT = "Contact Form Submitted"
-        BODY_TEXT = (json.dumps(event))
+        BODY_TEXT = (json.dumps(post_data))
         BODY_HTML = """<html>
         <head></head>
         <body>
@@ -21,7 +23,7 @@ def lambda_handler(event, context):
         <p>Details:</p>
         <p>{form_content}</p>
         </body>
-        </html>""".format(form_content=json.dumps(event))        
+        </html>""".format(form_content=json.dumps(post_data))        
         CHARSET = "UTF-8"
 
         client = boto3.client('ses',region_name=AWS_REGION)
