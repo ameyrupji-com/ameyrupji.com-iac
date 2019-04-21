@@ -83,6 +83,9 @@ module "get_root_lambda" {
   assets-bucket-name = "${var.assets-bucket-name}"
 }
 
+# API Gateway with CORS Enabled: (converted to modules)
+# https://medium.com/@MrPonath/terraform-and-aws-api-gateway-a137ee48a8ac
+
 resource "aws_api_gateway_rest_api" "domain_api_gateway" {
   name        = "${var.api-gateway-name}-api-gateway"
   description = "Api gateway for ${var.api-domain}"
@@ -134,12 +137,6 @@ module "option_email_method" {
 
 # module "deploy_domain_api_gateway" {
 #   source = "./modules/deploy_domain_api_gateway"
-
-
-#   # This is not working as terraform does not support inter midular dependancies 
-#   # This is going to be enabled in v0.12 which is in beta at the point of this 
-#   # development moving to use approach without modules
-#   fake-dependancies = []
 
 
 #   domain                  = "${var.domain}"

@@ -9,7 +9,3 @@ variable "api-subdomain" {}
 variable "api-gateway-rest-api-id" {}
 
 variable "api-gateway-stage-name" {}
-
-variable "fake-dependancies" {
-  type = "list"
-}
