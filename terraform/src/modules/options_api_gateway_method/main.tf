@@ -13,10 +13,9 @@ resource "aws_api_gateway_integration" "mock_api_gateway_integration" {
   type = "MOCK"
 
   request_templates = {
-    "application/xml" = <<EOF
+    "application/json" = <<EOF
 {
   "statusCode": 200
-  "body" : $input.json('$')
 }
 EOF
   }
