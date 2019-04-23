@@ -12,14 +12,14 @@ resource "aws_api_gateway_integration" "mock_api_gateway_integration" {
 
   type = "MOCK"
 
-    request_templates = {
-      "application/xml" = <<EOF
+  request_templates = {
+    "application/xml" = <<EOF
 {
   "statusCode": 200
   "body" : $input.json('$')
 }
 EOF
-    }
+  }
 
   depends_on = ["aws_api_gateway_method.gateway_method"]
 }
