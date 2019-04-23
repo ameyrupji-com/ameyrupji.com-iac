@@ -135,18 +135,16 @@ module "option_email_method" {
   api-gateway-resource-id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
 }
 
-# module "deploy_domain_api_gateway" {
-#   source = "./modules/deploy_domain_api_gateway"
+module "deploy_domain_api_gateway" {
+  source = "./modules/deploy_domain_api_gateway"
 
-
-#   domain                  = "${var.domain}"
-#   api-domain              = "${var.api-domain}"
-#   api-subdomain           = "${var.api-subdomain}"
-#   certificate-domain      = "${var.certificate-domain}"
-#   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-#   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
-# }
-
+  domain                  = "${var.domain}"
+  api-domain              = "${var.api-domain}"
+  api-subdomain           = "${var.api-subdomain}"
+  certificate-domain      = "${var.certificate-domain}"
+  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+}
 
 # TODO: enable logging for each method created
 
