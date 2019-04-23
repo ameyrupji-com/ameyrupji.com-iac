@@ -12,13 +12,13 @@ resource "aws_api_gateway_integration" "mock_api_gateway_integration" {
 
   type = "MOCK"
 
-  request_templates = {
-    "application/xml" = <<EOF
-{
-   "body" : $input.json('$')
-}
-EOF
-  }
+  #   request_templates = {
+  #     "application/xml" = <<EOF
+  # {
+  #    "body" : $input.json('$')
+  # }
+  # EOF
+  #   }
 
   depends_on = ["aws_api_gateway_method.gateway_method"]
 }
@@ -27,7 +27,7 @@ resource "aws_api_gateway_method_response" "gateway_method_200" {
   rest_api_id = "${var.api-gateway-rest-api-id}"
   resource_id = "${var.api-gateway-resource-id}"
   http_method = "${aws_api_gateway_method.gateway_method.http_method}"
-  status_code = 200
+  status_code = "200"
 
   response_models {
     "application/json" = "Empty"
