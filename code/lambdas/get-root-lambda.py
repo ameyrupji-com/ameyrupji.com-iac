@@ -11,7 +11,9 @@ def lambda_handler(event, context):
         print(e)
         return {
             'statusCode': 500,
-            'body': 'Error occurred!',
+            'body': json.dumps({
+                message: 'Error occurred!'
+            }),
             'headers' : {
                 'Access-Control-Allow-Origin' : '*'
             }
@@ -19,7 +21,9 @@ def lambda_handler(event, context):
     else:
         return {
             'statusCode': 200,
-            'body': 'Hello World! from api.ameyrupji.com',
+            'body': json.dumps({
+                message:'Hello World! from api.ameyrupji.com'
+            }),
             'headers' : {
                 'Access-Control-Allow-Origin' : '*'
             }

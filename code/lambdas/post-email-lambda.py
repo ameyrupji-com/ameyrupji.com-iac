@@ -56,7 +56,9 @@ def lambda_handler(event, context):
         print(e)
         return {
             'statusCode': 500,
-            'body': 'Error occurred in sending email!',
+            'body': json.dumps({
+                message: 'Error occurred in sending email!'
+            }),
             'headers' : {
                 'Access-Control-Allow-Origin' : '*'
             }
@@ -64,7 +66,9 @@ def lambda_handler(event, context):
     else:
         return {
             'statusCode': 200,
-            'body': 'Email successfully sent!',
+            'body': json.dumps({
+                message: 'Email successfully sent!'
+            }),
             'headers' : {
                 'Access-Control-Allow-Origin' : '*'
             }
