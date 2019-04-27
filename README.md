@@ -36,6 +36,7 @@ Main Subdomain | ameyrupji.com | beta.ameyrupji.com
 Alternate Subdomain | www.ameyrupji.com | www.beta.ameyrupji.com
 Blog Subdomain | blog.ameyrupji.com | blog.beta.ameyrupji.com
 Code Subdomain | code.ameyrupji.com | code.beta.ameyrupji.com
+IaC Subdomain | iac.ameyrupji.com | iac.beta.ameyrupji.com
 Images Subdomain | images.ameyrupji.com | images.beta.ameyrupji.com
 
 - Hosted Zones Record Sets
@@ -46,6 +47,7 @@ Main Subdomain |  | beta
 Alternate Subdomain | www | www.beta
 Blog Subdomain | blog | blog.beta
 Code Subdomain | code | code.beta
+IaC Subdomain | iac | iac.beta
 Images Subdomain | images | images.beta
 
 #### TODOs:
