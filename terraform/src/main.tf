@@ -26,8 +26,8 @@ module "s3_code_domain" {
   bucket_name = "${var.code-domain}"
 }
 
-# bucket for code subdomain
-module "s3_code_domain" {
+# bucket for iac subdomain
+module "s3_iac_domain" {
   source = "./modules/s3_web_hosting"
 
   subdomain   = "${var.iac-subdomain}"
