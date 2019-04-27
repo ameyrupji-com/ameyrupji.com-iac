@@ -12,6 +12,8 @@ variable "alternate-subdomain" {}
 
 variable "code-subdomain" {}
 
+variable "iac-subdomain" {}
+
 variable "blog-subdomain" {}
 
 variable "images-subdomain" {}
@@ -21,6 +23,8 @@ variable "main-domain" {}
 variable "alternate-domain" {}
 
 variable "code-domain" {}
+
+variable "iac-domain" {}
 
 variable "blog-domain" {}
 
