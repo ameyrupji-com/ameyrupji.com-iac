@@ -53,6 +53,7 @@ Images Subdomain | images | images.beta
 #### TODOs:
 
 - [x] Api Gateway with domain (api) for sending emails as POST request through the UI.
+- [ ] Testing IaC (https://github.com/gruntwork-io/terratest)
 - [ ] Lambda code as Git Submodule + Build changes.
 - [ ] Cloud Front CDN for ameyrupji.com.
 - [ ] Upgrade state to store in DynamoDB table to Terraform State.
