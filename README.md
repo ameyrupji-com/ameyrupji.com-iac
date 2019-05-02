@@ -23,7 +23,7 @@ This needs to be done manually before you can run the terraform code below:
   - ameyrupji.com-iac - Stores the terraform state files.
   - ameyrupji.com-assets - Stores the assets.
 - Hosted zones should automatically created while registering domain.
-- Create a certificate for *.ameyrupji.com through ACM Servie usijng the portal.
+- Create a certificate for *.ameyrupji.com (for prod) and *.beta.ameyrupji.com (for beta) through ACM Servie using the web portal.
 
 ### Created through Terraform 
 Two different environments are maintained **prod** and **beta**. For each of these environments the following resources are created:
