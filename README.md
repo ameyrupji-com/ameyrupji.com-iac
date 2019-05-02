@@ -52,7 +52,7 @@ Images Subdomain | images | images.beta
 
 #### TODOs:
 
-- [ ] Api Gateway with domain (api) for sending emails as POST request through the UI.
+- [x] Api Gateway with domain (api) for sending emails as POST request through the UI.
 - [ ] Lambda code as Git Submodule + Build changes.
 - [ ] Cloud Front CDN for ameyrupji.com.
 - [ ] Upgrade state to store in DynamoDB table to Terraform State.
