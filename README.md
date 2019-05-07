@@ -30,7 +30,7 @@ Two different environments are maintained **prod** and **beta**. For each of the
 
 - S3 Buckets
 
-Bucket Use | Prod Bucket Name | Beta Bucket Name
+Use | Prod Bucket Name | Beta Bucket Name
 --- | --- | --- 
 Main Subdomain | ameyrupji.com | beta.ameyrupji.com
 Alternate Subdomain | www.ameyrupji.com | www.beta.ameyrupji.com
@@ -41,7 +41,7 @@ Images Subdomain | images.ameyrupji.com | images.beta.ameyrupji.com
 
 - Hosted Zones Record Sets
 
-Record Set Use | Prod Record Set Name | Beta Record Set Name
+Use | Prod Record Set Name | Beta Record Set Name
 --- | --- | --- 
 Main Subdomain |  | beta
 Alternate Subdomain | www | www.beta
@@ -49,6 +49,23 @@ Blog Subdomain | blog | blog.beta
 Code Subdomain | code | code.beta
 IaC Subdomain | iac | iac.beta
 Images Subdomain | images | images.beta
+
+- API Gateway
+
+Url | Description
+--- | --- 
+api.ameyrupji.com | API gateway for main domain 
+beta.api.ameyrupji.com | API gateway for beta domain
+
+The following endpoints are implemented:
+
+Url | Method | Description
+--- | --- | --- 
+/ | OPTIONS | Used to enable CORS for _/ (root)_ resource.
+/ | GET | Sample Hello world at the root of the website served through the lambda.
+/email | OPTIONS | Used to enable CORS for _/email_ resource.
+/email | POST | Endpoint to send email to me.
+
 
 #### TODOs:
 
