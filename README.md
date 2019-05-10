@@ -2,9 +2,11 @@
 
 [![CircleCI](https://circleci.com/gh/ameyrupji-com/ameyrupji.com-iac.svg?style=svg)](https://circleci.com/gh/ameyrupji-com/ameyrupji.com-iac)
 
-Infrastructure As Code (iac) for hosting ameyrupji.com in AWS using Terraform. This repository createds the necessary AWS infastructure enables quick deployment and easy testability in beta environment before the code can be promoted to the live website. The builds are triggered through CircleCI integration of this repository.
+Git hub repository to create the necessary infrastructure to host my website accross muliple cloud providers (AWS, Google). This repository uses Terraform to create the required infastructure to enable feature deplopyment and easy testability of the website.
 
-Please fell free to use any part of this repository. If you find this useful please dont forget to Star or Folk this repository. If there are things that you would like me to improve in this code feel free to point it out by creating an Issue.  
+This code demonstrates my ability to work with AWS resources using terraform to build, change, and version infrastructure safely and efficiently. I am using CircleCI to build and deploy my website using enterprise style deployment pattern by using feature branch deployment. 
+
+Please feel free to use any part of this repository. If you find this useful please dont forget to Star or Folk this repository. If there are things that you would like me to improve in this code feel free to point it out via email or by creating an Issue.  
 
 ### Daigram
 ![Infrastructure Diagram](/images/ameyrupji.com-blueprint.png)
@@ -13,7 +15,7 @@ Link:
 https://cloudcraft.co/view/a84a92f3-0147-42eb-be3e-bc849d99d6d6?key=7EtAxVRr-L84VOa7CFUsWA&embed=true
 
 ## Infrastructure
-The following infrastructure needs to be created to host http://www.ameyrupji.com.
+The following infrastructure needs to be created to host http://www.ameyrupji.com/
 
 ### Initial Setup
 This needs to be done manually before you can run the terraform code below:
