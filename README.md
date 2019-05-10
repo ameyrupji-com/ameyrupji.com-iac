@@ -2,11 +2,12 @@
 
 [![CircleCI](https://circleci.com/gh/ameyrupji-com/ameyrupji.com-iac.svg?style=svg)](https://circleci.com/gh/ameyrupji-com/ameyrupji.com-iac)
 
-GitHub repository to create the necessary infrastructure to host my website accross muliple cloud providers (AWS, Google). This repository uses Terraform to create the required infastructure to enable feature deplopyment and easy testability of the website.
+This GitHub repository contains the code to create the infrastructure necessary to host my website across multiple cloud providers (AWS, Google). I am using Terraform to create the required infrastructure to enable feature deployment and easy testability of the website.
 
-This code demonstrates my ability to work with cloud providers using terraform to build, change, and version infrastructure safely and efficiently. I am using CircleCI to build and deploy my website using enterprise style deployment pattern by using feature branch deployment. 
+This code demonstrates my ability to work with multiple cloud providers using terraform to build, change, and version infrastructure safely and efficiently. I am using CircleCI to build and deploy my infrastructure using enterprise style deployment pattern by using feature branch deployment. 
 
-Please feel free to use any part of this repository. If you find this useful please dont forget to Star or Folk this repository. If there are things that you would like me to improve in this code feel free to point it out via email or by creating an Issue.  
+Please feel free to use any part of this repository. If you find this useful please Star or Folk this repository. If there is any suggestion for improvement within this code feel free to shoot me an email or create an issue.  
+
 
 ### Daigram
 ![Infrastructure Diagram](/images/ameyrupji.com-blueprint.png)
