@@ -2,7 +2,7 @@ region = "us-east-1"
 name = "ameyrupji"
 domain = "ameyrupji.com"
 lambda-version = "v1.0.0"
-assets-bucket-name = "ameyrupji.com-assets"
+assets-bucket-name = "beta.ameyrupji.com-assets"
 
 main-subdomain = "beta"
 alternate-subdomain = "www.beta"
