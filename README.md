@@ -32,7 +32,7 @@ This needs to be done manually before you can run the terraform code below:
 - Buy/Register ameyrupji.com domain through Route53 Service using the portal.
 - Create the following S3 Buckets using the portal
     - ameyrupji.com-iac - Stores the terraform state files.
-    - ameyrupji.com-assets - Stores the assets.
+    - ameyrupji.com-assets, beta.ameyrupji.com-assets - Stores the assets for each environment
 - Hosted zones should automatically created while registering domain.
 - Create a certificate for *.ameyrupji.com (for prod) and *.beta.ameyrupji.com (for beta) through ACM Servie using the web portal.
 - User for programatic AdminAccess (cli-user)

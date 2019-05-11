@@ -1,10 +1,3 @@
-#bucket for assets storage
-module "s3_assets" {
-  source = "./modules/s3_storage"
-
-  bucket_name = "${var.assets-bucket-name}"
-}
-
 # bucket for main subdomain 
 module "s3_domain" {
   source = "./modules/s3_web_hosting"
