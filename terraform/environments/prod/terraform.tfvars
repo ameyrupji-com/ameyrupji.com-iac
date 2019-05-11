@@ -12,7 +12,7 @@ blog-subdomain = "blog"
 images-subdomain = "images"
 
 main-domain = "ameyrupji.com"
-alternate-subdomain = "www.ameyrupji.com"
+alternate-domain = "www.ameyrupji.com"
 code-domain = "code.ameyrupji.com"
 iac-domain = "iac.ameyrupji.com"
 blog-domain = "blog.ameyrupji.com"
