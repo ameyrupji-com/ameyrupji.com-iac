@@ -12,18 +12,40 @@ variable "alternate-subdomain" {}
 
 variable "code-subdomain" {}
 
+variable "iac-subdomain" {}
+
 variable "blog-subdomain" {}
 
 variable "images-subdomain" {}
 
-variable "main-subdomain-bucket" {}
+variable "main-domain" {}
 
-variable "alternate-subdomain-bucket" {}
+variable "alternate-domain" {}
 
-variable "code-subdomain-bucket" {}
+variable "code-domain" {}
 
-variable "blog-subdomain-bucket" {}
+variable "iac-domain" {}
 
-variable "images-subdomain-bucket" {}
+variable "blog-domain" {}
+
+variable "images-domain" {}
+
+variable "api-gateway-name" {}
 
 variable "api-subdomain" {}
+
+variable "api-domain" {}
+
+variable "api-gateway-stage-name" {}
+
+variable "certificate-domain" {}
+
+variable "post-email-lambda-name" {}
+
+variable "post-email-lambda-file-name" {}
+
+variable "assets-bucket-name" {}
+
+variable "get-root-lambda-name" {}
+
+variable "get-root-lambda-file-name" {}
