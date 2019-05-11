@@ -94,7 +94,16 @@ jobs:
             python package-lambdas.py
             cd ..
       - *save_build_repo
-  upload:
+  upload-develop:
+    <<: *build_config
+    steps:
+      - *restore_build_repo
+      - aws-s3/copy:
+          from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
+          to: 's3://beta.ameyrupji.com-assets/v1.0.0/'
+          arguments: --recursive
+      - *save_repo
+  upload-master:
     <<: *build_config
     steps:
       - *restore_build_repo
@@ -148,12 +157,22 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
-      - upload:
+      - upload-develop:
           requires:
             - zip
+          filters:
+            branches:
+              only: develop
+      - upload-master:
+          requires:
+            - zip
+          filters:
+            branches:
+              only: master
       - build:
           requires:
-            - upload
+            - upload-master
+            - upload-develop
       - plan:
           requires:
             - build
