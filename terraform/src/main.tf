@@ -53,6 +53,15 @@ module "s3_images_domain" {
   bucket_name = "${var.images-domain}"
 }
 
+# bucket for old subdomain
+module "s3_old_domain" {
+  source = "./modules/s3_web_hosting"
+
+  subdomain   = "${var.old-subdomain}"
+  domain      = "${var.domain}"
+  bucket_name = "${var.old-domain}"
+}
+
 module "post_email_lambda" {
   source = "./modules/api_lambda_with_logging"
 
