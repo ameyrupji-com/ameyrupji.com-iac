@@ -62,6 +62,7 @@ Blog Subdomain | blog.ameyrupji.com | blog.beta.ameyrupji.com
 Code Subdomain | code.ameyrupji.com | code.beta.ameyrupji.com
 IaC Subdomain | iac.ameyrupji.com | iac.beta.ameyrupji.com
 Images Subdomain | images.ameyrupji.com | images.beta.ameyrupji.com
+Old  Subdomain | old.ameyrupji.com | old.beta.ameyrupji.com
 
 - Hosted Zones Record Sets
 
@@ -73,6 +74,7 @@ Blog Subdomain | blog | blog.beta
 Code Subdomain | code | code.beta
 IaC Subdomain | iac | iac.beta
 Images Subdomain | images | images.beta
+Old Subdomain | old | old.beta
 
 - API Gateway
 
