@@ -18,6 +18,8 @@ variable "blog-subdomain" {}
 
 variable "images-subdomain" {}
 
+variable "old-subdomain" {}
+
 variable "main-domain" {}
 
 variable "alternate-domain" {}
@@ -29,6 +31,8 @@ variable "iac-domain" {}
 variable "blog-domain" {}
 
 variable "images-domain" {}
+
+variable "old-domain" {}
 
 variable "api-gateway-name" {}
 
