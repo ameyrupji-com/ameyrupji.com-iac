@@ -12,7 +12,7 @@ blog-subdomain = "blog"
 images-subdomain = "images"
 old-subdomain = "old"
 styleguide-subdomain = "styleguide"
-sso-subdomain = "styleguide"
+sso-subdomain = "sso"
 
 main-domain = "ameyrupji.com"
 alternate-domain = "www.ameyrupji.com"
