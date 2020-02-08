@@ -20,6 +20,8 @@ variable "images-subdomain" {}
 
 variable "old-subdomain" {}
 
+variable "styleguide-subdomain" {}
+
 variable "main-domain" {}
 
 variable "alternate-domain" {}
@@ -33,6 +35,8 @@ variable "blog-domain" {}
 variable "images-domain" {}
 
 variable "old-domain" {}
+
+variable "styleguide-domain" {}
 
 variable "api-gateway-name" {}
 
