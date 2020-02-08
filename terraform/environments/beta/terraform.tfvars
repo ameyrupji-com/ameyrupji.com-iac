@@ -12,6 +12,7 @@ blog-subdomain = "blog.beta"
 images-subdomain = "images.beta"
 old-subdomain = "old.beta"
 styleguide-subdomain = "styleguide.beta"
+sso-subdomain = "styleguide.beta"
 
 main-domain = "beta.ameyrupji.com"
 alternate-domain = "www.beta.ameyrupji.com"
@@ -21,6 +22,8 @@ blog-domain = "blog.beta.ameyrupji.com"
 images-domain = "images.beta.ameyrupji.com"
 old-domain = "old.beta.ameyrupji.com"
 styleguide-domain = "styleguide.beta.ameyrupji.com"
+sso-domain = "styleguide.beta.ameyrupji.com"
+
 
 api-gateway-name = "api-beta-ameyrupji"
 api-subdomain = "api.beta"

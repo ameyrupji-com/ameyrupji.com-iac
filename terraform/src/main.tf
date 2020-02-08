@@ -71,6 +71,15 @@ module "s3_styleguide_domain" {
   bucket_name = "${var.styleguide-domain}"
 }
 
+# bucket for sso subdomain
+module "s3_sso_domain" {
+  source = "./modules/s3_web_hosting"
+
+  subdomain   = "${var.sso-subdomain}"
+  domain      = "${var.domain}"
+  bucket_name = "${var.sso-domain}"
+}
+
 module "post_email_lambda" {
   source = "./modules/api_lambda_with_logging"
 
