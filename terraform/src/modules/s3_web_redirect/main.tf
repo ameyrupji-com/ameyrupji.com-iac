@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "static_web_hosting_s3_bucket" {
     redirect_all_requests_to = "${var.redirect_bucket_name}"
   }
 
-  tags {
+  tags = {
     Name = "${var.bucket_name}"
   }
 }
