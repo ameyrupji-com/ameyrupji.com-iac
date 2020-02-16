@@ -55,7 +55,7 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      [[ $CIRCLE_BRANCH = "master" ]] && ENV="prod" || ENV="beta"
+      [[ $CIRCLE_BRANCH =~ ^(master|hotfix)$ ]] && ENV="prod" || ENV="beta"
       echo "ENV:"
       echo $ENV
       ENV_DIRECTORY="environments/${ENV}/."
@@ -94,6 +94,15 @@ jobs:
             python package-lambdas.py
             cd ..
       - *save_build_repo
+  upload-branch:
+    <<: *build_config
+    steps:
+      - *restore_build_repo
+      - aws-s3/copy:
+          from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
+          to: 's3://beta.ameyrupji.com-assets/${CIRCLE_BRANCH}'
+          arguments: --recursive
+      - *save_repo
   upload-develop:
     <<: *build_config
     steps:
@@ -157,6 +166,15 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
+      - upload-branch:
+          requires:
+            - zip
+          filters:
+            branches:
+              ignore: 
+                - master
+                - develop
+                - /release.*/
       - upload-develop:
           requires:
             - zip
@@ -171,6 +189,7 @@ workflows:
               only: master
       - build:
           requires:
+            - upload-branch
             - upload-master
             - upload-develop
       - plan:
@@ -188,7 +207,11 @@ workflows:
             - approve
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /feature.*/
+                - /bugfix.*/
+                - /hotfix.*/
       - apply:
           requires:
             - plan
