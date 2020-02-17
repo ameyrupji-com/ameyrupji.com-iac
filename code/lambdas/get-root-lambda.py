@@ -22,7 +22,7 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'body': json.dumps({
-                'message': 'Hello World! from api.ameyrupji.com'
+                'message': 'Hello World! from https://api.ameyrupji.com'
             }),
             'headers' : {
                 'Access-Control-Allow-Origin' : '*'
