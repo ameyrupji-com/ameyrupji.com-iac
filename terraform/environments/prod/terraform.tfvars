@@ -11,6 +11,8 @@ iac-subdomain = "iac"
 blog-subdomain = "blog"
 images-subdomain = "images"
 old-subdomain = "old"
+styleguide-subdomain = "styleguide"
+sso-subdomain = "sso"
 
 main-domain = "ameyrupji.com"
 alternate-domain = "www.ameyrupji.com"
@@ -19,6 +21,9 @@ iac-domain = "iac.ameyrupji.com"
 blog-domain = "blog.ameyrupji.com"
 images-domain = "images.ameyrupji.com"
 old-domain = "old.ameyrupji.com"
+styleguide-subdomain = "styleguide.ameyrupji.com"
+sso-domain = "sso.ameyrupji.com"
+
 
 api-gateway-name = "ameyrupji"
 api-subdomain = "api."
