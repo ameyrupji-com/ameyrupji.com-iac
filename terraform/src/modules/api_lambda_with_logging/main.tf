@@ -66,7 +66,7 @@ resource "aws_iam_role_policy_attachment" "lambda_iam_role_policy_attachment_log
   policy_arn = "${aws_iam_policy.lambda_logging_iam_policy.arn}"
 }
 
-resource "aws_iam_policy" "x" {
+resource "aws_iam_policy" "custom_iam_policy" {
   count = "${((var.custom-policy["name"] == "" ? 0 : 1) * (var.custom-policy["document"] == "" ? 0 : 1))}"
 
   name        = "${var.custom-policy["name"]}"
