@@ -76,10 +76,8 @@ resource "aws_iam_policy" "custom_iam_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "custom_iam_role_policy_attachment" {
-  depends_on = [
-    aws_iam_policy.custom_iam_policy[1]
-  ]
+  count = "${len(aws_iam_policy.custom_iam_policy) == 0 ? 0 : 1}"
 
   role       = "${aws_iam_role.lambda_exec_iam_role.name}"
-  policy_arn = "${aws_iam_policy.custom_iam_policy.arn}"
+  policy_arn = "${aws_iam_policy.custom_iam_policy[0].arn}"
 }
