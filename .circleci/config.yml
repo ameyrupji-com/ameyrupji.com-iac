@@ -202,7 +202,11 @@ workflows:
             - plan
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /feature.*/
+                - /bugfix.*/
+                - /hotfix.*/
       - apply-with-approval:
           requires:
             - approve
