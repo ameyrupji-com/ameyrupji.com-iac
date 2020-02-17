@@ -30,7 +30,7 @@ resource "aws_lambda_function" "lambda_function" {
 
   role = "${aws_iam_role.lambda_exec_iam_role.arn}"
 
-  source_code_hash = "${filebase64sha256("../../code/lambdas/zipped/${var.lambda-file-name}.py.zip")}"
+  source_code_hash = "${filebase64sha256("../../code/lambdas/${var.lambda-file-name}.py")}"
 
   lifecycle {
     ignore_changes = ["last_modified"]
