@@ -218,4 +218,8 @@ workflows:
             - plan
           filters:
             branches:
-              ignore: master
+              ignore: 
+                - master
+                - /feature.*/
+                - /bugfix.*/
+                - /hotfix.*/
