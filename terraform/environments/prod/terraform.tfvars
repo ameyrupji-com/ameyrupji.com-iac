@@ -1,7 +1,7 @@
 region = "us-east-1"
 name = "ameyrupji"
 domain = "ameyrupji.com"
-lambda-version = "v1.0.0"
+lambda-version = "master"
 assets-bucket-name = "ameyrupji.com-assets"
 
 main-subdomain = ""

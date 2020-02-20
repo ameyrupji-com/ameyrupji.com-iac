@@ -29,11 +29,11 @@ resource "aws_api_gateway_method_response" "gateway_method_200" {
   http_method = "${aws_api_gateway_method.gateway_method.http_method}"
   status_code = "200"
 
-  response_models {
+  response_models = {
     "application/json" = "Empty"
   }
 
-  response_parameters {
+  response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
     "method.response.header.Access-Control-Allow-Origin"  = true
