@@ -21,7 +21,7 @@ iac-domain = "iac.ameyrupji.com"
 blog-domain = "blog.ameyrupji.com"
 images-domain = "images.ameyrupji.com"
 old-domain = "old.ameyrupji.com"
-styleguide-subdomain = "styleguide.ameyrupji.com"
+styleguide-domain = "styleguide.ameyrupji.com"
 sso-domain = "sso.ameyrupji.com"
 
 
