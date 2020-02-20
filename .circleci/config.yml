@@ -110,7 +110,7 @@ jobs:
       - *restore_build_repo
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
-          to: 's3://beta.ameyrupji.com-assets/v1.0.0/'
+          to: 's3://beta.ameyrupji.com-assets/develop'
           arguments: --recursive
       - *save_repo
   upload-master:
@@ -119,7 +119,7 @@ jobs:
       - *restore_build_repo
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
-          to: 's3://ameyrupji.com-assets/v1.0.0/'
+          to: 's3://ameyrupji.com-assets/master'
           arguments: --recursive
       - *save_repo
   build:
@@ -131,7 +131,7 @@ jobs:
           command: |
             cd /home/circleci/ameyrupji-iac/terraform
             if [ $(terraform fmt | grep -v .terraform | tee fmt_result.txt | wc -l) -gt 0 ]; then
-              echo "Format of this terraform files is not appropiate:"
+              echo "Format of this terraform files is not appropriate:"
               echo
               cat fmt_result.txt
               rm fmt_result.txt
@@ -152,7 +152,7 @@ jobs:
             cd /home/circleci/ameyrupji-iac/terraform
             cd workspace
             ls -la
-            terraform plan -out=terraform.plan
+            terraform plan -var="lambda-version=${CIRCLE_BRANCH}" -out=terraform.plan 
       - persist_to_workspace:
           root: /home/circleci/ameyrupji-iac/
           paths:
