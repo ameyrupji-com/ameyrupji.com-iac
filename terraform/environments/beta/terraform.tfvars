@@ -1,7 +1,7 @@
 region = "us-east-1"
 name = "ameyrupji"
 domain = "ameyrupji.com"
-lambda-version = "v1.0.0"
+lambda-version = "develop"
 assets-bucket-name = "beta.ameyrupji.com-assets"
 
 main-subdomain = "beta"
@@ -11,6 +11,8 @@ iac-subdomain = "iac.beta"
 blog-subdomain = "blog.beta"
 images-subdomain = "images.beta"
 old-subdomain = "old.beta"
+styleguide-subdomain = "styleguide.beta"
+sso-subdomain = "sso.beta"
 
 main-domain = "beta.ameyrupji.com"
 alternate-domain = "www.beta.ameyrupji.com"
@@ -19,6 +21,9 @@ iac-domain = "iac.beta.ameyrupji.com"
 blog-domain = "blog.beta.ameyrupji.com"
 images-domain = "images.beta.ameyrupji.com"
 old-domain = "old.beta.ameyrupji.com"
+styleguide-domain = "styleguide.beta.ameyrupji.com"
+sso-domain = "sso.beta.ameyrupji.com"
+
 
 api-gateway-name = "api-beta-ameyrupji"
 api-subdomain = "api.beta"

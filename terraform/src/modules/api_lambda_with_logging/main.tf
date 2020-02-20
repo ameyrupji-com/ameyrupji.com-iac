@@ -30,7 +30,11 @@ resource "aws_lambda_function" "lambda_function" {
 
   role = "${aws_iam_role.lambda_exec_iam_role.arn}"
 
-  source_code_hash = "${base64sha256(file("../../code/lambdas/zipped/${var.lambda-file-name}.py.zip"))}"
+  source_code_hash = "${filebase64sha256("../../code/lambdas/${var.lambda-file-name}.py")}"
+
+  lifecycle {
+    ignore_changes = ["last_modified"]
+  }
 }
 
 resource "aws_cloudwatch_log_group" "lambda_cloudwatch_log_group" {
@@ -79,5 +83,5 @@ resource "aws_iam_role_policy_attachment" "custom_iam_role_policy_attachment" {
   count = "${((var.custom-policy["name"] == "" ? 0 : 1) * (var.custom-policy["document"] == "" ? 0 : 1))}"
 
   role       = "${aws_iam_role.lambda_exec_iam_role.name}"
-  policy_arn = "${aws_iam_policy.custom_iam_policy.arn}"
+  policy_arn = "${aws_iam_policy.custom_iam_policy[0].arn}"
 }

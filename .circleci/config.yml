@@ -3,13 +3,13 @@ version: 2.1
 references:
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.4
+  aws-s3: circleci/aws-s3@1.0.15
 
 build_image: &build_image
   circleci/python:latest
 
 base_image: &base_image
-  hashicorp/terraform:0.11.14
+  hashicorp/terraform:0.12.20
 
 working_directory: &working_directory
   /home/circleci/ameyrupji-iac
@@ -55,7 +55,7 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      [[ $CIRCLE_BRANCH = "master" ]] && ENV="prod" || ENV="beta"
+      [[ [ $CIRCLE_BRANCH == "master" ] || [ $CIRCLE_BRANCH == "hotfix" ] ]] && ENV="prod" || ENV="beta"
       echo "ENV:"
       echo $ENV
       ENV_DIRECTORY="environments/${ENV}/."
@@ -66,6 +66,7 @@ terraform_init: &terraform_init
       cp -R src/. ${ENV_DIRECTORY} workspace/
       cd workspace
       ls -la
+      terraform -v
       terraform init
 
 apply_job: &apply_job
@@ -94,13 +95,22 @@ jobs:
             python package-lambdas.py
             cd ..
       - *save_build_repo
+  upload-branch:
+    <<: *build_config
+    steps:
+      - *restore_build_repo
+      - aws-s3/copy:
+          from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
+          to: 's3://beta.ameyrupji.com-assets/${CIRCLE_BRANCH}'
+          arguments: --recursive
+      - *save_repo
   upload-develop:
     <<: *build_config
     steps:
       - *restore_build_repo
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
-          to: 's3://beta.ameyrupji.com-assets/v1.0.0/'
+          to: 's3://beta.ameyrupji.com-assets/develop'
           arguments: --recursive
       - *save_repo
   upload-master:
@@ -109,7 +119,7 @@ jobs:
       - *restore_build_repo
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
-          to: 's3://ameyrupji.com-assets/v1.0.0/'
+          to: 's3://ameyrupji.com-assets/master'
           arguments: --recursive
       - *save_repo
   build:
@@ -121,7 +131,7 @@ jobs:
           command: |
             cd /home/circleci/ameyrupji-iac/terraform
             if [ $(terraform fmt | grep -v .terraform | tee fmt_result.txt | wc -l) -gt 0 ]; then
-              echo "Format of this terraform files is not appropiate:"
+              echo "Format of this terraform files is not appropriate:"
               echo
               cat fmt_result.txt
               rm fmt_result.txt
@@ -142,7 +152,7 @@ jobs:
             cd /home/circleci/ameyrupji-iac/terraform
             cd workspace
             ls -la
-            terraform plan -out=terraform.plan
+            terraform plan -var="lambda-version=${CIRCLE_BRANCH}" -out=terraform.plan 
       - persist_to_workspace:
           root: /home/circleci/ameyrupji-iac/
           paths:
@@ -157,6 +167,15 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
+      - upload-branch:
+          requires:
+            - zip
+          filters:
+            branches:
+              ignore: 
+                - master
+                - develop
+                - /release.*/
       - upload-develop:
           requires:
             - zip
@@ -171,6 +190,7 @@ workflows:
               only: master
       - build:
           requires:
+            - upload-branch
             - upload-master
             - upload-develop
       - plan:
@@ -182,16 +202,28 @@ workflows:
             - plan
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /feature.*/
+                - /bugfix.*/
+                - /hotfix.*/
       - apply-with-approval:
           requires:
             - approve
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /feature.*/
+                - /bugfix.*/
+                - /hotfix.*/
       - apply:
           requires:
             - plan
           filters:
             branches:
-              ignore: master
+              ignore: 
+                - master
+                - /feature.*/
+                - /bugfix.*/
+                - /hotfix.*/
