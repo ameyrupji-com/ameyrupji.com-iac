@@ -63,6 +63,7 @@ Code Subdomain | code.ameyrupji.com | code.beta.ameyrupji.com
 IaC Subdomain | iac.ameyrupji.com | iac.beta.ameyrupji.com
 Images Subdomain | images.ameyrupji.com | images.beta.ameyrupji.com
 Old  Subdomain | old.ameyrupji.com | old.beta.ameyrupji.com
+Style Guide Subdomain | styleguide.ameyrupji.com | styleguide.beta.ameyrupji.com
 
 - Hosted Zones Record Sets
 
@@ -75,6 +76,7 @@ Code Subdomain | code | code.beta
 IaC Subdomain | iac | iac.beta
 Images Subdomain | images | images.beta
 Old Subdomain | old | old.beta
+Style Guide Subdomain | styleguide | styleguide.beta
 
 - API Gateway
 
