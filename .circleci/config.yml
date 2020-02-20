@@ -55,7 +55,7 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      [[ [ $CIRCLE_BRANCH == "master" ] || [ $CIRCLE_BRANCH == "hotfix" ] ]] && ENV="prod" || ENV="beta"
+      [[ $CIRCLE_BRANCH == "master" || $CIRCLE_BRANCH == "hotfix" ]] && ENV="prod" || ENV="beta"
       echo "ENV:"
       echo $ENV
       ENV_DIRECTORY="environments/${ENV}/."
