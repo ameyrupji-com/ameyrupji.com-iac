@@ -80,6 +80,15 @@ module "s3_sso_domain" {
   bucket_name = "${var.sso-domain}"
 }
 
+# bucket for infrastructure subdomain
+module "s3_infrastructure_domain" {
+  source = "./modules/s3_web_hosting"
+
+  subdomain   = "${var.infrastructure-subdomain}"
+  domain      = "${var.domain}"
+  bucket_name = "${var.infrastructure-domain}"
+}
+
 module "post_email_lambda" {
   source = "./modules/api_lambda_with_logging"
 

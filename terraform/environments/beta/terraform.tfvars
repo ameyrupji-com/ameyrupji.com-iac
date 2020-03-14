@@ -13,6 +13,8 @@ images-subdomain = "images.beta"
 old-subdomain = "old.beta"
 styleguide-subdomain = "styleguide.beta"
 sso-subdomain = "sso.beta"
+infrastructure-subdomain = "infrastructure.beta"
+
 
 main-domain = "beta.ameyrupji.com"
 alternate-domain = "www.beta.ameyrupji.com"
@@ -23,6 +25,7 @@ images-domain = "images.beta.ameyrupji.com"
 old-domain = "old.beta.ameyrupji.com"
 styleguide-domain = "styleguide.beta.ameyrupji.com"
 sso-domain = "sso.beta.ameyrupji.com"
+infrastructure-domain = "infrastructure.beta.ameyrupji.com"
 
 
 api-gateway-name = "api-beta-ameyrupji"

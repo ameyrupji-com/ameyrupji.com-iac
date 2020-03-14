@@ -24,6 +24,8 @@ variable "styleguide-subdomain" {}
 
 variable "sso-subdomain" {}
 
+variable "infrastructure-subdomain" {}
+
 variable "main-domain" {}
 
 variable "alternate-domain" {}
@@ -41,6 +43,8 @@ variable "old-domain" {}
 variable "styleguide-domain" {}
 
 variable "sso-domain" {}
+
+variable "infrastructure-domain" {}
 
 variable "api-gateway-name" {}
 
