@@ -13,6 +13,7 @@ images-subdomain = "images"
 old-subdomain = "old"
 styleguide-subdomain = "styleguide"
 sso-subdomain = "sso"
+infrastructure-subdomain = "infrastructure"
 
 main-domain = "ameyrupji.com"
 alternate-domain = "www.ameyrupji.com"
@@ -23,6 +24,7 @@ images-domain = "images.ameyrupji.com"
 old-domain = "old.ameyrupji.com"
 styleguide-domain = "styleguide.ameyrupji.com"
 sso-domain = "sso.ameyrupji.com"
+infrastructure-domain = "infrastructure.ameyrupji.com"
 
 
 api-gateway-name = "ameyrupji"
