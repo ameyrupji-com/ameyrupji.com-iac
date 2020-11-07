@@ -2,9 +2,9 @@ variable "domain" {}
 
 variable "subdomain" {}
 
-variable "bucket-name" {}
+variable "bucket_name" {}
 
-variable "certificate-domain" {
+variable "certificate_domain" {
   description = "Wildcard SSL certificate domain name.  E.g. *.example.com"
   default     = ""
 }
@@ -14,12 +14,12 @@ variable "aliases" {
   default     = []
 }
 
-variable "cache-ttl" {
+variable "cache_ttl" {
   description = "Default TTL to give objects requested from S3 in CloudFront for caching."
   default     = 3600
 }
 
-variable "price-class" {
+variable "price_class" {
   description = "Which price class to enable in CloudFront. "
   default     = "PriceClass_100"
 }
