@@ -1,10 +1,14 @@
 # bucket for main subdomain 
 module "s3_domain" {
-  source = "./modules/s3_web_hosting"
+  source = "./modules/s3_secure_web_hosting"
 
   subdomain   = "${var.main-subdomain}"
   domain      = "${var.domain}"
   bucket_name = "${var.main-domain}"
+
+  certificate_domain = "${var.certificate-domain}"
+  cache_ttl          = 86400
+  price_class        = "PriceClass_100"
 }
 
 # bucket for alternate subdomain
