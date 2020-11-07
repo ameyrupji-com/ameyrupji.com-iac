@@ -33,7 +33,7 @@ api-subdomain = "api.beta"
 api-domain = "api.beta.ameyrupji.com"
 api-gateway-stage-name = "beta"
 
-certificate-domain = "*.beta.ameyrupji.com"
+certificate-domain = "*.ameyrupji.com"
 
 post-email-lambda-name = "beta-post-email"
 post-email-lambda-file-name = "post-email-lambda"
