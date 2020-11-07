@@ -14,6 +14,8 @@ resource "aws_cloudfront_distribution" "secure_web_cloudfront_distribution" {
 
   #   aliases = ["${compact(concat(list(var.domain), var.aliases))}"]
 
+  aliases = ["${var.domain}"]
+
   viewer_certificate {
     acm_certificate_arn      = "${data.aws_acm_certificate.domain_certificate.arn}"
     minimum_protocol_version = "TLSv1"
