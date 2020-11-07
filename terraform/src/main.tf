@@ -9,6 +9,7 @@ module "s3_domain" {
   certificate_domain = "${var.certificate-domain}"
   cache_ttl          = 86400
   price_class        = "PriceClass_100"
+  aliases            = ["${var.alternate-domain}"]
 }
 
 # bucket for alternate subdomain

@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "secure_web_hosting_s3_bucket_policy_document" {
       identifiers = ["*"]
     }
 
-    conditions {
+    condition {
       test     = "Bool"
       variable = "aws:SecureTransport"
       values   = ["false "]
