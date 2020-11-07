@@ -14,7 +14,7 @@ resource "aws_cloudfront_distribution" "secure_web_cloudfront_distribution" {
 
   #   aliases = ["${compact(concat(list(var.domain), var.aliases))}"]
 
-  aliases = ["${var.domain}"]
+  aliases = ["${var.bucket_name}"]
 
   viewer_certificate {
     acm_certificate_arn      = "${data.aws_acm_certificate.domain_certificate.arn}"
