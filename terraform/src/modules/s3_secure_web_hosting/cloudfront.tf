@@ -12,7 +12,7 @@ resource "aws_cloudfront_distribution" "secure_web_cloudfront_distribution" {
   is_ipv6_enabled = true
   http_version    = "http2"
 
-  aliases = ["${compact(concat(list(var.domain), var.aliases))}"]
+  #   aliases = ["${compact(concat(list(var.domain), var.aliases))}"]
 
   viewer_certificate {
     acm_certificate_arn      = "${data.aws_acm_certificate.domain_certificate.arn}"
