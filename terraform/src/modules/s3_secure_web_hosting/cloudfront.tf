@@ -39,9 +39,9 @@ resource "aws_cloudfront_distribution" "secure_web_cloudfront_distribution" {
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
 
-    default_ttl = "${var.cache_ttl}"
-    min_ttl     = "${(var.cache_ttl / 4) < 60 ? 0 : floor(var.cache_ttl / 4)}"
-    max_ttl     = "${floor(var.cache_ttl * 24)}"
+    default_ttl = "${var.cache-ttl}"
+    min_ttl     = "${(var.cache-ttl / 4) < 60 ? 0 : floor(var.cache-ttl / 4)}"
+    max_ttl     = "${floor(var.cache-ttl * 24)}"
 
     forwarded_values {
       query_string = false
@@ -57,7 +57,7 @@ resource "aws_cloudfront_distribution" "secure_web_cloudfront_distribution" {
   // 100: Limit to only Europe, USA, and Canada endpoints.
   // 200: + Hong Kong, Philippines, South Korea, Singapore, & Taiwan.
   // All: + South America, and Australa.
-  price_class = "${var.price_class}"
+  price_class = "${var.price-class}"
 
   restrictions {
     geo_restriction {
