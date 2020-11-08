@@ -32,7 +32,8 @@ api-subdomain = "api."
 api-domain = "api.ameyrupji.com"
 api-gateway-stage-name = "prod"
 
-certificate-domain = "*.ameyrupji.com"
+certificate-main-domain = "*.ameyrupji.com"
+certificate-sub-domain = "*.ameyrupji.com"
 
 post-email-lambda-name = "post-email"
 post-email-lambda-file-name = "post-email-lambda"
