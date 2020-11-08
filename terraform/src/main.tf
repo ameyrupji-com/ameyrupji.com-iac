@@ -1,10 +1,14 @@
 # bucket for main subdomain 
 module "s3_domain" {
-  source = "./modules/s3_web_hosting"
+  source = "./modules/s3_secure_web_hosting"
 
   subdomain   = "${var.main-subdomain}"
   domain      = "${var.domain}"
   bucket_name = "${var.main-domain}"
+
+  certificate_domain = "${var.certificate-main-domain}"
+  cache_ttl          = 86400
+  price_class        = "PriceClass_100"
 }
 
 # bucket for alternate subdomain
@@ -186,7 +190,7 @@ module "deploy_domain_api_gateway" {
   domain                  = "${var.domain}"
   api-domain              = "${var.api-domain}"
   api-subdomain           = "${var.api-subdomain}"
-  certificate-domain      = "${var.certificate-domain}"
+  certificate-domain      = "${var.certificate-sub-domain}"
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
   api-gateway-stage-name  = "${var.api-gateway-stage-name}"
 }
