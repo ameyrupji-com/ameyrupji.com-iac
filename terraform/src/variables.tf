@@ -54,7 +54,9 @@ variable "api-domain" {}
 
 variable "api-gateway-stage-name" {}
 
-variable "certificate-domain" {}
+variable "certificate-main-domain" {}
+
+variable "certificate-sub-domain" {}
 
 variable "post-email-lambda-name" {}
 
