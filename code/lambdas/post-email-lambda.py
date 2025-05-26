@@ -52,6 +52,7 @@ def lambda_handler(event, context):
             },
             Source=SENDER
         )
+        print('Email sent! Message ID:' + response['MessageId']);
     except ClientError as e:
         print(e)
         return {

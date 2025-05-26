@@ -3,10 +3,11 @@ version: 2.1
 references:
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.15
+  aws-cli: circleci/aws-cli@5.1.1
+  aws-s3: circleci/aws-s3@4.1.1
 
 build_image: &build_image
-  circleci/python:latest
+  cimg/python:3.12
 
 base_image: &base_image
   hashicorp/terraform:0.12.20
@@ -95,10 +96,21 @@ jobs:
             python package-lambdas.py
             cd ..
       - *save_build_repo
+  aws-cli-setup:
+    <<: *build_config
+    steps:
+      - *restore_build_repo
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+      - *save_repo
   upload-branch:
     <<: *build_config
     steps:
       - *restore_build_repo
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://beta.ameyrupji.com-assets/${CIRCLE_BRANCH}'
@@ -167,9 +179,12 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
-      - upload-branch:
+      - aws-cli-setup:
           requires:
             - zip
+      - upload-branch:
+          requires:
+            - aws-cli-setup
           filters:
             branches:
               ignore: 
@@ -178,13 +193,13 @@ workflows:
                 - /release.*/
       - upload-develop:
           requires:
-            - zip
+            - aws-cli-setup
           filters:
             branches:
               only: develop
       - upload-master:
           requires:
-            - zip
+            - aws-cli-setup
           filters:
             branches:
               only: master
