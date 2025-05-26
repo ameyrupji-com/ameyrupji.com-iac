@@ -7,7 +7,7 @@ variable "lambda-file-name" {}
 variable "assets-bucket-name" {}
 
 variable "custom-policy" {
-  type = "map"
+  type = map(string)
 
   default = {
     name        = ""
