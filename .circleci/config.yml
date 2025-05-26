@@ -10,7 +10,7 @@ build_image: &build_image
   cimg/python:3.12
 
 base_image: &base_image
-  hashicorp/terraform:0.12.20
+  hashicorp/terraform:1.8.5
 
 working_directory: &working_directory
   /home/circleci/ameyrupji-iac
@@ -108,9 +108,7 @@ jobs:
     <<: *build_config
     steps:
       - *restore_build_repo
-      - aws-cli/setup:
-          aws_access_key_id: AWS_ACCESS_KEY_ID
-          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+      - *aws-cli-setup
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://beta.ameyrupji.com-assets/${CIRCLE_BRANCH}'
