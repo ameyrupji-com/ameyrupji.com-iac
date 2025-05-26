@@ -6,5 +6,5 @@ terraform {
     encrypt = "true"
   }
 
-  required_version = ">= 1.8.5"
+  required_version = ">= 0.13"
 }
