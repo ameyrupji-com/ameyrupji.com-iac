@@ -96,6 +96,14 @@ jobs:
             python package-lambdas.py
             cd ..
       - *save_build_repo
+  aws-cli-setup:
+    <<: *build_config
+    steps:
+      - *restore_build_repo
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+      - *save_repo
   upload-branch:
     <<: *build_config
     steps:
@@ -171,9 +179,12 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
-      - upload-branch:
+      - aws-cli-setup:
           requires:
             - zip
+      - upload-branch:
+          requires:
+            - aws-cli-setup
           filters:
             branches:
               ignore: 
@@ -182,13 +193,13 @@ workflows:
                 - /release.*/
       - upload-develop:
           requires:
-            - zip
+            - aws-cli-setup
           filters:
             branches:
               only: develop
       - upload-master:
           requires:
-            - zip
+            - aws-cli-setup
           filters:
             branches:
               only: master
