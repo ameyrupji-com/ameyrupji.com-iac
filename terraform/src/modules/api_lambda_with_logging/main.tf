@@ -26,7 +26,7 @@ resource "aws_lambda_function" "lambda_function" {
   s3_bucket = "${var.assets-bucket-name}"
   s3_key    = "${var.lambda-version}/${var.lambda-file-name}.py.zip"
   handler   = "${var.lambda-file-name}.lambda_handler"
-  runtime   = "python3.7"
+  runtime   = "python3.12"
 
   role = "${aws_iam_role.lambda_exec_iam_role.arn}"
 
