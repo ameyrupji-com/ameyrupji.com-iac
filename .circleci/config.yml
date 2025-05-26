@@ -3,10 +3,10 @@ version: 2.1
 references:
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.15
+  aws-s3: cimg/aws-s3@4.1.1
 
 build_image: &build_image
-  circleci/python:latest
+  cimg/python:latest
 
 base_image: &base_image
   hashicorp/terraform:0.12.20
