@@ -6,7 +6,7 @@ orbs:
   aws-s3: circleci/aws-s3@4.1.1
 
 build_image: &build_image
-  cimg/python:latest
+  cimg/python:3.12
 
 base_image: &base_image
   hashicorp/terraform:0.12.20
