@@ -96,19 +96,13 @@ jobs:
             python package-lambdas.py
             cd ..
       - *save_build_repo
-  aws-cli-setup:
+  upload-branch:
     <<: *build_config
     steps:
       - *restore_build_repo
       - aws-cli/setup:
           aws_access_key_id: AWS_ACCESS_KEY_ID
           aws_secret_access_key: AWS_SECRET_ACCESS_KEY
-      - *save_repo
-  upload-branch:
-    <<: *build_config
-    steps:
-      - *restore_build_repo
-      - *aws-cli-setup
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://beta.ameyrupji.com-assets/${CIRCLE_BRANCH}'
@@ -118,6 +112,9 @@ jobs:
     <<: *build_config
     steps:
       - *restore_build_repo
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://beta.ameyrupji.com-assets/develop'
@@ -127,6 +124,9 @@ jobs:
     <<: *build_config
     steps:
       - *restore_build_repo
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://ameyrupji.com-assets/master'
@@ -177,12 +177,9 @@ workflows:
   build_plan_approve_apply:
     jobs:
       - zip
-      - aws-cli-setup:
-          requires:
-            - zip
       - upload-branch:
           requires:
-            - aws-cli-setup
+            - zip
           filters:
             branches:
               ignore: 
@@ -191,13 +188,13 @@ workflows:
                 - /release.*/
       - upload-develop:
           requires:
-            - aws-cli-setup
+            - zip
           filters:
             branches:
               only: develop
       - upload-master:
           requires:
-            - aws-cli-setup
+            - zip
           filters:
             branches:
               only: master
