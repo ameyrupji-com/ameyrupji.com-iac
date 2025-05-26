@@ -103,7 +103,6 @@ jobs:
       - aws-cli/setup:
           aws_access_key_id: AWS_ACCESS_KEY_ID
           aws_secret_access_key: AWS_SECRET_ACCESS_KEY
-          aws_region: us-east-1
       - aws-s3/copy:
           from: /home/circleci/ameyrupji-iac/code/lambdas/zipped/ 
           to: 's3://beta.ameyrupji.com-assets/${CIRCLE_BRANCH}'
