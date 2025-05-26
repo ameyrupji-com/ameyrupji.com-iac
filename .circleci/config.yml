@@ -68,8 +68,8 @@ terraform_init: &terraform_init
       cd workspace
       ls -la
       terraform -v
-      terraform state replace-provider registry.terraform.io/-/aws registry.terraform.io/hashicorp/aws
       terraform init
+      terraform state replace-provider registry.terraform.io/-/aws registry.terraform.io/hashicorp/aws
 
 apply_job: &apply_job
   <<: *default_config
