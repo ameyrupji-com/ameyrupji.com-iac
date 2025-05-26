@@ -3,7 +3,7 @@ version: 2.1
 references:
 
 orbs:
-  aws-s3: cimg/aws-s3@4.1.1
+  aws-s3: circleci/aws-s3@4.1.1
 
 build_image: &build_image
   cimg/python:latest
