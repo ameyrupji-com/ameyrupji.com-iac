@@ -10,7 +10,7 @@ build_image: &build_image
   cimg/python:3.12
 
 base_image: &base_image
-  hashicorp/terraform:1.8.5
+  hashicorp/terraform:0.13.7
 
 working_directory: &working_directory
   /home/circleci/ameyrupji-iac
@@ -68,8 +68,8 @@ terraform_init: &terraform_init
       cd workspace
       ls -la
       terraform -v
+      terraform 0.13upgrade
       terraform init
-      terraform state replace-provider registry.terraform.io/-/aws registry.terraform.io/hashicorp/aws
 
 apply_job: &apply_job
   <<: *default_config
