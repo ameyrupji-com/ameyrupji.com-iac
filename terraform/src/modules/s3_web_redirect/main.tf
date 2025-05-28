@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "static_web_hosting_s3_bucket" {
 }
 
 data "aws_route53_zone" "static_website_rout53_zone" {
-  name = "${var.domain}."
+  name = var.domain
 }
 
 resource "aws_route53_record" "static_website_route53_record" {
