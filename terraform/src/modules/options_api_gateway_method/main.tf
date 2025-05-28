@@ -20,7 +20,7 @@ resource "aws_api_gateway_integration" "mock_api_gateway_integration" {
 EOF
   }
 
-  depends_on = ["aws_api_gateway_method.gateway_method"]
+  depends_on = [aws_api_gateway_method.gateway_method]
 }
 
 resource "aws_api_gateway_method_response" "gateway_method_200" {
@@ -39,7 +39,7 @@ resource "aws_api_gateway_method_response" "gateway_method_200" {
     "method.response.header.Access-Control-Allow-Origin"  = true
   }
 
-  depends_on = ["aws_api_gateway_method.gateway_method"]
+  depends_on = [aws_api_gateway_method.gateway_method]
 }
 
 resource "aws_api_gateway_integration_response" "api_gateway_integration_response" {
@@ -54,5 +54,5 @@ resource "aws_api_gateway_integration_response" "api_gateway_integration_respons
     "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
 
-  depends_on = ["aws_api_gateway_method_response.gateway_method_200"]
+  depends_on = [aws_api_gateway_method_response.gateway_method_200]
 }
