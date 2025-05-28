@@ -146,22 +146,22 @@ module "get_root_method" {
   region                     = var.region
   path                       = "/"
   http-method                = "GET"
-  lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
-  lambda-function-invoke-arn = "${module.get_root_lambda.lambda-invoke-arn}"
-  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id    = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  lambda-function-arn        = module.get_root_lambda.lambda-arn
+  lambda-function-invoke-arn = module.get_root_lambda.lambda-invoke-arn
+  api-gateway-rest-api-id    = aws_api_gateway_rest_api.domain_api_gateway.id
+  api-gateway-resource-id    = aws_api_gateway_rest_api.domain_api_gateway.root_resource_id
 }
 
 module "option_root_method" {
   source = "./modules/options_api_gateway_method"
 
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  api-gateway-rest-api-id = aws_api_gateway_rest_api.domain_api_gateway.id
+  api-gateway-resource-id = aws_api_gateway_rest_api.domain_api_gateway.root_resource_id
 }
 
 resource "aws_api_gateway_resource" "email_api_gateway_resource" {
-  rest_api_id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  parent_id   = "${aws_api_gateway_rest_api.domain_api_gateway.root_resource_id}"
+  rest_api_id = aws_api_gateway_rest_api.domain_api_gateway.id
+  parent_id   = aws_api_gateway_rest_api.domain_api_gateway.root_resource_id
   path_part   = "email"
 }
 
@@ -171,17 +171,17 @@ module "post_email_method" {
   region                     = var.region
   http-method                = "POST"
   path                       = "/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
-  lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
-  lambda-function-invoke-arn = "${module.post_email_lambda.lambda-invoke-arn}"
-  api-gateway-rest-api-id    = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id    = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
+  lambda-function-arn        = module.post_email_lambda.lambda-arn
+  lambda-function-invoke-arn = module.post_email_lambda.lambda-invoke-arn
+  api-gateway-rest-api-id    = aws_api_gateway_rest_api.domain_api_gateway.id
+  api-gateway-resource-id    = aws_api_gateway_resource.email_api_gateway_resource.id
 }
 
 module "option_email_method" {
   source = "./modules/options_api_gateway_method"
 
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-resource-id = "${aws_api_gateway_resource.email_api_gateway_resource.id}"
+  api-gateway-rest-api-id = aws_api_gateway_rest_api.domain_api_gateway.id
+  api-gateway-resource-id = aws_api_gateway_resource.email_api_gateway_resource.id
 }
 
 module "deploy_domain_api_gateway" {
@@ -191,7 +191,7 @@ module "deploy_domain_api_gateway" {
   api-domain              = var.api-domain
   api-subdomain           = var.api-subdomain
   certificate-domain      = var.certificate-sub-domain
-  api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
+  api-gateway-rest-api-id = aws_api_gateway_rest_api.domain_api_gateway.id
   api-gateway-stage-name  = var.api-gateway-stage-name
 }
 
