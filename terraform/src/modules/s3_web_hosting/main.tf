@@ -1,20 +1,21 @@
 # creating bucket
 resource "aws_s3_bucket" "static_web_hosting_s3_bucket" {
-  bucket = "${var.bucket_name}"
+  bucket = var.bucket_name
 
   website {
     index_document = "index.html"
     error_document = "error.html"
+    # Deprecated, but no replacement block for aws_s3_bucket as of Terraform AWS provider 5.x
   }
 
   tags = {
-    Name = "${var.bucket_name}"
+    Name = var.bucket_name
   }
 }
 
 # creating bucket public read policy
 resource "aws_s3_bucket_policy" "static_web_hosting_s3_bucket_policy" {
-  bucket = "${aws_s3_bucket.static_web_hosting_s3_bucket.id}"
+  bucket = aws_s3_bucket.static_web_hosting_s3_bucket.id
 
   policy = <<POLICY
 {
@@ -39,13 +40,13 @@ data "aws_route53_zone" "static_website_rout53_zone" {
 }
 
 resource "aws_route53_record" "static_website_route53_record" {
-  zone_id = "${data.aws_route53_zone.static_website_rout53_zone.zone_id}"
-  name    = "${var.subdomain}"
+  zone_id = data.aws_route53_zone.static_website_rout53_zone.zone_id
+  name    = var.subdomain
   type    = "A"
 
   alias {
-    name                   = "${aws_s3_bucket.static_web_hosting_s3_bucket.website_domain}"
-    zone_id                = "${aws_s3_bucket.static_web_hosting_s3_bucket.hosted_zone_id}"
+    name                   = aws_s3_bucket.static_web_hosting_s3_bucket.website_domain
+    zone_id                = aws_s3_bucket.static_web_hosting_s3_bucket.hosted_zone_id
     evaluate_target_health = false
   }
 }

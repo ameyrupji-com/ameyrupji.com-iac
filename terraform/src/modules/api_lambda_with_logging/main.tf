@@ -33,7 +33,7 @@ resource "aws_lambda_function" "lambda_function" {
   source_code_hash = "${filebase64sha256("../../code/lambdas/${var.lambda-file-name}.py")}"
 
   lifecycle {
-    ignore_changes = ["last_modified"]
+    ignore_changes = [last_modified]
   }
 }
 
