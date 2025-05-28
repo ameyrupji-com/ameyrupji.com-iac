@@ -4,9 +4,10 @@ resource "aws_s3_bucket" "domain_iac_s3_bucket" {
 
   versioning {
     enabled = true
+    # Deprecated, but no replacement block for aws_s3_bucket as of Terraform AWS provider 5.x
   }
 
-  tags {
+  tags = {
     Name = "${var.domain}-iac"
   }
 }

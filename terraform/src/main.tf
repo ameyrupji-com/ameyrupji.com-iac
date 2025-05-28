@@ -2,11 +2,11 @@
 module "s3_domain" {
   source = "./modules/s3_secure_web_hosting"
 
-  subdomain   = "${var.main-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.main-domain}"
+  subdomain   = var.main-subdomain
+  domain      = var.domain
+  bucket_name = var.main-domain
 
-  certificate_domain = "${var.certificate-main-domain}"
+  certificate_domain = var.certificate-main-domain
   cache_ttl          = 86400
   price_class        = "PriceClass_100"
 }
@@ -15,92 +15,92 @@ module "s3_domain" {
 module "s3_www_domain" {
   source = "./modules/s3_web_redirect"
 
-  subdomain            = "${var.alternate-subdomain}"
-  domain               = "${var.domain}"
-  bucket_name          = "${var.alternate-domain}"
-  redirect_bucket_name = "${var.main-domain}"
+  subdomain            = var.alternate-subdomain
+  domain               = var.domain
+  bucket_name          = var.alternate-domain
+  redirect_bucket_name = var.main-domain
 }
 
 # bucket for code subdomain
 module "s3_code_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.code-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.code-domain}"
+  subdomain   = var.code-subdomain
+  domain      = var.domain
+  bucket_name = var.code-domain
 }
 
 # bucket for iac subdomain
 module "s3_iac_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.iac-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.iac-domain}"
+  subdomain   = var.iac-subdomain
+  domain      = var.domain
+  bucket_name = var.iac-domain
 }
 
 # bucket for blog subdomain
 module "s3_blog_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.blog-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.blog-domain}"
+  subdomain   = var.blog-subdomain
+  domain      = var.domain
+  bucket_name = var.blog-domain
 }
 
 # bucket for images subdomain
 module "s3_images_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.images-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.images-domain}"
+  subdomain   = var.images-subdomain
+  domain      = var.domain
+  bucket_name = var.images-domain
 }
 
 # bucket for old subdomain
 module "s3_old_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.old-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.old-domain}"
+  subdomain   = var.old-subdomain
+  domain      = var.domain
+  bucket_name = var.old-domain
 }
 
 # bucket for styleguide subdomain
 module "s3_styleguide_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.styleguide-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.styleguide-domain}"
+  subdomain   = var.styleguide-subdomain
+  domain      = var.domain
+  bucket_name = var.styleguide-domain
 }
 
 # bucket for sso subdomain
 module "s3_sso_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.sso-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.sso-domain}"
+  subdomain   = var.sso-subdomain
+  domain      = var.domain
+  bucket_name = var.sso-domain
 }
 
 # bucket for infrastructure subdomain
 module "s3_infrastructure_domain" {
   source = "./modules/s3_web_hosting"
 
-  subdomain   = "${var.infrastructure-subdomain}"
-  domain      = "${var.domain}"
-  bucket_name = "${var.infrastructure-domain}"
+  subdomain   = var.infrastructure-subdomain
+  domain      = var.domain
+  bucket_name = var.infrastructure-domain
 }
 
 module "post_email_lambda" {
   source = "./modules/api_lambda_with_logging"
 
-  lambda-name      = "${var.post-email-lambda-name}"
-  lambda-file-name = "${var.post-email-lambda-file-name}"
+  lambda-name      = var.post-email-lambda-name
+  lambda-file-name = var.post-email-lambda-file-name
 
-  lambda-version     = "${var.lambda-version}"
-  assets-bucket-name = "${var.assets-bucket-name}"
+  lambda-version     = var.lambda-version
+  assets-bucket-name = var.assets-bucket-name
 
   custom-policy = {
     name        = "${var.post-email-lambda-name}-ses-send-email-access"
@@ -125,11 +125,11 @@ EOF
 module "get_root_lambda" {
   source = "./modules/api_lambda_with_logging"
 
-  lambda-name      = "${var.get-root-lambda-name}"
-  lambda-file-name = "${var.get-root-lambda-file-name}"
+  lambda-name      = var.get-root-lambda-name
+  lambda-file-name = var.get-root-lambda-file-name
 
-  lambda-version     = "${var.lambda-version}"
-  assets-bucket-name = "${var.assets-bucket-name}"
+  lambda-version     = var.lambda-version
+  assets-bucket-name = var.assets-bucket-name
 }
 
 # API Gateway with CORS Enabled: (converted to modules)
@@ -143,7 +143,7 @@ resource "aws_api_gateway_rest_api" "domain_api_gateway" {
 module "get_root_method" {
   source = "./modules/api_gateway_method"
 
-  region                     = "${var.region}"
+  region                     = var.region
   path                       = "/"
   http-method                = "GET"
   lambda-function-arn        = "${module.get_root_lambda.lambda-arn}"
@@ -168,7 +168,7 @@ resource "aws_api_gateway_resource" "email_api_gateway_resource" {
 module "post_email_method" {
   source = "./modules/api_gateway_method"
 
-  region                     = "${var.region}"
+  region                     = var.region
   http-method                = "POST"
   path                       = "/${aws_api_gateway_resource.email_api_gateway_resource.path_part}"
   lambda-function-arn        = "${module.post_email_lambda.lambda-arn}"
@@ -187,12 +187,12 @@ module "option_email_method" {
 module "deploy_domain_api_gateway" {
   source = "./modules/deploy_domain_api_gateway"
 
-  domain                  = "${var.domain}"
-  api-domain              = "${var.api-domain}"
-  api-subdomain           = "${var.api-subdomain}"
-  certificate-domain      = "${var.certificate-sub-domain}"
+  domain                  = var.domain
+  api-domain              = var.api-domain
+  api-subdomain           = var.api-subdomain
+  certificate-domain      = var.certificate-sub-domain
   api-gateway-rest-api-id = "${aws_api_gateway_rest_api.domain_api_gateway.id}"
-  api-gateway-stage-name  = "${var.api-gateway-stage-name}"
+  api-gateway-stage-name  = var.api-gateway-stage-name
 }
 
 # TODO: enable logging for each method created
