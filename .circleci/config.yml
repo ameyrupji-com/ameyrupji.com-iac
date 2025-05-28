@@ -10,7 +10,7 @@ build_image: &build_image
   cimg/python:3.12
 
 base_image: &base_image
-  hashicorp/terraform:1.3.7
+  hashicorp/terraform:1.12.0
 
 working_directory: &working_directory
   /home/circleci/ameyrupji-iac
